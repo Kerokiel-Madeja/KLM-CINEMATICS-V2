@@ -1595,7 +1595,7 @@
   let activeGenreFilter = "All";
   let activeFilteredItems = [];
   let previousScrollPosition = 0;
-  let watchlistItems = new Set(["Interstellar Odyssey", "Neon Dynasties", "Spirit Blade: Infinite", "Eclipse: Origins"]);
+  let watchlistItems = new Set();
 
   // Load Watchlist from LocalStorage
   try {
@@ -1603,7 +1603,13 @@
     if (saved) {
       const parsed = JSON.parse(saved);
       if (Array.isArray(parsed) && parsed.length > 0) {
-        watchlistItems = new Set(parsed);
+        const legacyMock = ["interstellar odyssey", "neon dynasties", "spirit blade: infinite", "eclipse: origins", "interstellar", "arcane", "bleach", "one piece"];
+        const isOnlyMock = parsed.length <= 4 && parsed.every(t => legacyMock.includes(String(t).toLowerCase().trim()));
+        if (!isOnlyMock) {
+          watchlistItems = new Set(parsed);
+        } else {
+          watchlistItems = new Set();
+        }
       }
     }
   } catch (e) {

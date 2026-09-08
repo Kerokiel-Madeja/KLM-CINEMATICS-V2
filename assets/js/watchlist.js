@@ -15,80 +15,15 @@
   const TMDB_POSTER_MD      = "https://image.tmdb.org/t/p/w500";
   const TMDB_BACKDROP_MD    = "https://image.tmdb.org/t/p/w780";
 
-  // Curated initial seed items with authentic TMDB IDs, posters, and metadata
-  const SEED_WATCHLIST_ITEMS = [
-    {
-      id: 157336,
-      tmdbId: 157336,
-      title: "Interstellar",
-      posterPath: "/yQvGrMoipbRoddT0ZR8tPoR7NfX.jpg",
-      backdropPath: "/5XNQBqnBwPA9yT0jZ0p3s8bbLh0.jpg",
-      posterUrl: "https://image.tmdb.org/t/p/w500/yQvGrMoipbRoddT0ZR8tPoR7NfX.jpg",
-      backdropUrl: "https://image.tmdb.org/t/p/w780/5XNQBqnBwPA9yT0jZ0p3s8bbLh0.jpg",
-      posterClass: "poster-1",
-      mediaType: "movie",
-      isMovie: true,
-      rating: "8.6",
-      year: "2014",
-      genres: "Adventure • Drama • Sci-Fi",
-      overview: "The adventures of a group of explorers who make use of a newly discovered wormhole to surpass the limitations on human space travel.",
-      badge: "SAVED"
-    },
-    {
-      id: 94605,
-      tmdbId: 94605,
-      title: "Arcane",
-      posterPath: "/fqldf2t8ztc9aiwn3k6mlX3tvRT.jpg",
-      backdropPath: "/5cvnxEHT3e39DvT6ARw4GNCFrB0.jpg",
-      posterUrl: "https://image.tmdb.org/t/p/w500/fqldf2t8ztc9aiwn3k6mlX3tvRT.jpg",
-      backdropUrl: "https://image.tmdb.org/t/p/w780/5cvnxEHT3e39DvT6ARw4GNCFrB0.jpg",
-      posterClass: "poster-5",
-      mediaType: "tv",
-      isMovie: false,
-      rating: "8.7",
-      year: "2021",
-      genres: "Animation • Sci-Fi & Fantasy",
-      overview: "Amid the stark discord of twin cities Piltover and Zaun, two sisters fight on rival sides of a war between magic technologies and incompatible convictions.",
-      badge: "SAVED"
-    },
-    {
-      id: 30984,
-      tmdbId: 30984,
-      title: "Bleach",
-      posterPath: "/2EewmxXe72ogD0EaWM8gqa0ccIw.jpg",
-      backdropPath: "/o0NsbcIvsllg6CJX0FBFY8wWbsn.jpg",
-      posterUrl: "https://image.tmdb.org/t/p/w500/2EewmxXe72ogD0EaWM8gqa0ccIw.jpg",
-      backdropUrl: "https://image.tmdb.org/t/p/w780/o0NsbcIvsllg6CJX0FBFY8wWbsn.jpg",
-      posterClass: "poster-9",
-      mediaType: "anime",
-      isMovie: false,
-      rating: "8.4",
-      year: "2004",
-      genres: "Action • Fantasy • Supernatural",
-      overview: "For as long as he can remember, Ichigo Kurosaki has been able to see ghosts. But when he meets Rukia, a Soul Reaper, his life changes forever.",
-      badge: "SAVED"
-    },
-    {
-      id: 37854,
-      tmdbId: 37854,
-      title: "One Piece",
-      posterPath: "/dB4EDhre2dsC2kxYDavyKWqLQwi.jpg",
-      backdropPath: "/2rmK7mnchw9Xr3XdiTFSxTTLXqv.jpg",
-      posterUrl: "https://image.tmdb.org/t/p/w500/dB4EDhre2dsC2kxYDavyKWqLQwi.jpg",
-      backdropUrl: "https://image.tmdb.org/t/p/w780/2rmK7mnchw9Xr3XdiTFSxTTLXqv.jpg",
-      posterClass: "poster-10",
-      mediaType: "anime",
-      isMovie: false,
-      rating: "8.7",
-      year: "1999",
-      genres: "Action • Adventure • Comedy",
-      overview: "Years ago, the fearsome Pirate King, Gol D. Roger was executed leaving behind a huge cache of riches and the famed One Piece.",
-      badge: "SAVED"
-    }
-  ];
-
   /* ── In-Memory Watchlist State ───────────────────────────── */
   let watchlist = [];
+
+  // Known default demo seed IDs & titles from older builds to auto-clean on existing test devices
+  const DEFAULT_SEED_IDS = [157336, 94605, 30984, 37854];
+  const DEFAULT_SEED_TITLES = [
+    "interstellar", "arcane", "bleach", "one piece",
+    "interstellar odyssey", "neon dynasties", "spirit blade: infinite", "eclipse: origins"
+  ];
 
   /* ── Storage Initialization & Migration ──────────────────── */
   function initStorage() {
@@ -97,7 +32,23 @@
       if (savedItemsJson) {
         const parsed = JSON.parse(savedItemsJson);
         if (Array.isArray(parsed)) {
+          // If stored items are purely the old automated demo seed items, clean them up
+          const isPurelyDefaultSeed = parsed.length > 0 && parsed.length <= 4 && parsed.every((item) => {
+            const id = Number(item.tmdbId || item.id);
+            const title = (item.title || "").toLowerCase().trim();
+            return DEFAULT_SEED_IDS.includes(id) || DEFAULT_SEED_TITLES.includes(title);
+          });
+
+          const isCleanedFlag = localStorage.getItem("klm_watchlist_v2_initialized");
+          if (!isCleanedFlag && isPurelyDefaultSeed) {
+            watchlist = [];
+            persistWatchlist();
+            localStorage.setItem("klm_watchlist_v2_initialized", "true");
+            return;
+          }
+
           watchlist = parsed;
+          localStorage.setItem("klm_watchlist_v2_initialized", "true");
           return;
         }
       }
@@ -107,11 +58,11 @@
       if (legacyJson) {
         const legacyTitles = JSON.parse(legacyJson);
         if (Array.isArray(legacyTitles) && legacyTitles.length > 0) {
-          // Map legacy titles into rich objects
-          watchlist = legacyTitles.map((t, idx) => {
-            const match = SEED_WATCHLIST_ITEMS.find((s) => s.title.toLowerCase() === t.toLowerCase());
-            if (match) return { ...match };
-            return {
+          const isLegacyPureSeed = legacyTitles.length <= 4 && legacyTitles.every((t) =>
+            DEFAULT_SEED_TITLES.includes(String(t).toLowerCase().trim())
+          );
+          if (!isLegacyPureSeed) {
+            watchlist = legacyTitles.map((t, idx) => ({
               id: Date.now() + idx,
               tmdbId: null,
               title: t,
@@ -119,7 +70,7 @@
               backdropPath: "",
               posterUrl: "",
               backdropUrl: "",
-              posterClass: `poster-${(idx % 12) + 1}`,
+              posterClass: "poster-" + ((idx % 12) + 1),
               mediaType: "movie",
               isMovie: true,
               rating: "8.5",
@@ -127,19 +78,21 @@
               genres: "Cinema Masterpiece",
               overview: "Now streaming on KLM CINEMATICS in ultra-high fidelity.",
               badge: "SAVED"
-            };
-          });
-          persistWatchlist();
-          return;
+            }));
+            persistWatchlist();
+            localStorage.setItem("klm_watchlist_v2_initialized", "true");
+            return;
+          }
         }
       }
 
-      // Default initial seed
-      watchlist = [...SEED_WATCHLIST_ITEMS];
+      // Default: Clean empty watchlist for every new user and device!
+      watchlist = [];
       persistWatchlist();
+      localStorage.setItem("klm_watchlist_v2_initialized", "true");
     } catch (err) {
-      console.warn("[Watchlist] Storage error, using fallback seed:", err);
-      watchlist = [...SEED_WATCHLIST_ITEMS];
+      console.warn("[Watchlist] Storage error, using empty watchlist:", err);
+      watchlist = [];
     }
   }
 

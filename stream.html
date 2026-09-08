@@ -178,7 +178,7 @@
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
                 </span>
                 <span class="item-text">My List</span>
-                <span class="item-count">5 Saved</span>
+                <span class="item-count">0 Saved</span>
               </a>
             </div>
           </div>
@@ -447,59 +447,16 @@
           <a href="#all-watchlist" class="section-more">Browse all &rarr;</a>
         </div>
         <div class="cards-grid" id="cards-watchlist">
-          <div class="cinema-card" tabindex="0" role="button" aria-label="Play Interstellar Odyssey">
-            <div class="card-poster poster-1">
-              <span class="card-badge">SAVED</span>
-              <span class="card-rating">⭐ 9.4</span>
-              <button type="button" class="card-play-center-btn" tabindex="-1" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-              </button>
+          <div class="watchlist-empty-state" style="grid-column: 1 / -1;">
+            <div class="watchlist-empty-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+              </svg>
             </div>
-            <div class="card-details">
-              <h3 class="card-title">Interstellar Odyssey</h3>
-              <p class="card-genre">Resume from 1h 14m</p>
-            </div>
-          </div>
-          <div class="cinema-card" tabindex="0" role="button" aria-label="Play Neon Dynasties">
-            <div class="card-poster poster-5">
-              <span class="card-badge">NEW EPISODE</span>
-              <span class="card-rating">⭐ 9.5</span>
-              <button type="button" class="card-play-center-btn" tabindex="-1" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-              </button>
-            </div>
-            <div class="card-details">
-              <h3 class="card-title">Neon Dynasties</h3>
-              <p class="card-genre">S3 E4 available</p>
-            </div>
-          </div>
-          <div class="cinema-card" tabindex="0" role="button" aria-label="Play Spirit Blade: Infinite">
-            <div class="card-poster poster-9">
-              <span class="card-badge">SAVED</span>
-              <span class="card-rating">⭐ 9.7</span>
-              <button type="button" class="card-play-center-btn" tabindex="-1" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-              </button>
-            </div>
-            <div class="card-details">
-              <h3 class="card-title">Spirit Blade: Infinite</h3>
-              <p class="card-genre">Episode 12 up next</p>
-            </div>
-          </div>
-          <div class="cinema-card" tabindex="0" role="button" aria-label="Play Eclipse: Origins">
-            <div class="card-poster poster-3">
-              <span class="card-badge">SAVED</span>
-              <span class="card-rating">⭐ 9.1</span>
-              <button type="button" class="card-play-center-btn" tabindex="-1" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-              </button>
-            </div>
-            <div class="card-details">
-              <h3 class="card-title">Eclipse: Origins</h3>
-              <p class="card-genre">Watch in 4K HDR</p>
-            </div>
-          </div>
-        </div>
+            <h3>Your Watchlist is Empty</h3>
+            <p>Explore our catalog of movies, TV shows, and anime to save titles for instant streaming.</p>
+            <a href="#home" class="watchlist-empty-action-btn" id="empty-watchlist-explore-btn">Explore Titles</a>
+          </div></div>
       </section>
     </main>
 
