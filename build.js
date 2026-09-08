@@ -4,7 +4,8 @@ const JavaScriptObfuscator = require('javascript-obfuscator');
 const { minify: minifyHtml } = require('html-minifier-terser');
 const CleanCSS = require('clean-css');
 
-const cleanCSS = new CleanCSS({ level: 2 });
+// Level 1: Safe minification (no rule reordering, no breaking cascade/specificity)
+const cleanCSS = new CleanCSS({ level: 1, inline: false });
 
 async function build() {
   console.log('🚀 Starting KLM CINEMATICS production build...');
@@ -24,6 +25,7 @@ async function build() {
     const content = fs.readFileSync(path.join(__dirname, file), 'utf8');
     const minified = await minifyHtml(content, {
       collapseWhitespace: true,
+      conservativeCollapse: true, // Preserve single spaces between tags
       removeComments: true,
       removeRedundantAttributes: true,
       useShortDoctype: true,
@@ -34,11 +36,34 @@ async function build() {
     fs.writeFileSync(path.join(dist, file), minified, 'utf8');
   }
 
-  // 2. Minify CSS files
+  // 2. Process & Bundle CSS files
   const cssDir = path.join(__dirname, 'assets', 'css');
   if (fs.existsSync(cssDir)) {
     const cssFiles = fs.readdirSync(cssDir).filter(f => f.endsWith('.css'));
+
+    // First, process global.css and INLINE its imported local stylesheets
+    const globalCssPath = path.join(cssDir, 'global.css');
+    if (fs.existsSync(globalCssPath)) {
+      console.log('🎨 Inlining and bundling master stylesheet: global.css');
+      const rawGlobal = fs.readFileSync(globalCssPath, 'utf8');
+      const importRegex = /@import\s+url\(["']?\.\/([^"']+)["']?\);/g;
+      let inlinedGlobal = rawGlobal;
+      let match;
+      while ((match = importRegex.exec(rawGlobal)) !== null) {
+        const importedFile = match[1];
+        const fullPath = path.join(cssDir, importedFile);
+        if (fs.existsSync(fullPath)) {
+          const fileContent = fs.readFileSync(fullPath, 'utf8');
+          inlinedGlobal = inlinedGlobal.replace(match[0], `\n/* Inlined ${importedFile} */\n` + fileContent + '\n');
+        }
+      }
+      const minifiedGlobal = cleanCSS.minify(inlinedGlobal).styles;
+      fs.writeFileSync(path.join(dist, 'assets', 'css', 'global.css'), minifiedGlobal, 'utf8');
+    }
+
+    // Minify all other individual CSS files as well
     for (const file of cssFiles) {
+      if (file === 'global.css') continue;
       console.log(`🎨 Minifying CSS: ${file}`);
       const content = fs.readFileSync(path.join(cssDir, file), 'utf8');
       const minified = cleanCSS.minify(content).styles;
@@ -46,7 +71,7 @@ async function build() {
     }
   }
 
-  // 3. Obfuscate & Minify JS files
+  // 3. Obfuscate & Minify JS files with safe runtime settings
   const jsDir = path.join(__dirname, 'assets', 'js');
   if (fs.existsSync(jsDir)) {
     const jsFiles = fs.readdirSync(jsDir).filter(f => f.endsWith('.js'));
@@ -55,16 +80,15 @@ async function build() {
       const content = fs.readFileSync(path.join(jsDir, file), 'utf8');
       const obfuscationResult = JavaScriptObfuscator.obfuscate(content, {
         compact: true,
-        controlFlowFlattening: true,
-        controlFlowFlatteningThreshold: 0.75,
-        deadCodeInjection: false, // keep false for optimal runtime performance and 100% stability
+        controlFlowFlattening: false, // Disable flattening to maintain 60fps animations & prevent stack issues
+        deadCodeInjection: false,
         identifierNamesGenerator: 'hexadecimal',
-        renameGlobals: false, // preserve globals shared between script tags
+        renameGlobals: false, // Preserve window & document globals
         rotateStringArray: true,
         stringArray: true,
         stringArrayEncoding: ['base64'],
-        stringArrayThreshold: 0.8,
-        transformObjectKeys: true
+        stringArrayThreshold: 0.75,
+        transformObjectKeys: false // CRUCIAL: Do not transform object keys to prevent breaking DOM APIs
       });
       fs.writeFileSync(path.join(dist, 'assets', 'js', file), obfuscationResult.getObfuscatedCode(), 'utf8');
     }
