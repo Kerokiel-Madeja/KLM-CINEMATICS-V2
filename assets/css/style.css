@@ -673,8 +673,67 @@
   display: none !important;
 }
 
-.navbar.scrolled .my-list-btn {
+/* Hide top-bar My List button in scrolled state (while keeping drawer footer My List visible) */
+.navbar.scrolled .navbar-top .my-list-btn,
+.navbar.scrolled .right-nav-list .my-list-btn {
   display: none !important;
+}
+
+/* Universal My List Drawer / Scrolled Menu Button (Visible on ALL screen sizes & all pages) */
+.nav-menu-collapse #footer-my-list-btn,
+.nav-menu-collapse .my-list-btn,
+.nav-menu-footer #footer-my-list-btn,
+.nav-menu-footer .my-list-btn {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  padding: 10px 14px !important;
+  border-radius: 12px !important;
+  color: #c8c8d8 !important;
+  font-size: 0.95rem !important;
+  font-weight: 500 !important;
+  text-decoration: none !important;
+  background: rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  transition: all 0.2s ease !important;
+}
+
+.nav-menu-collapse #footer-my-list-btn:hover,
+.nav-menu-collapse .my-list-btn:hover,
+.nav-menu-footer #footer-my-list-btn:hover,
+.nav-menu-footer .my-list-btn:hover {
+  background: rgba(229, 9, 20, 0.16) !important;
+  border-color: rgba(229, 9, 20, 0.4) !important;
+  color: #ffffff !important;
+}
+
+.nav-menu-collapse #footer-my-list-btn .item-icon,
+.nav-menu-footer #footer-my-list-btn .item-icon {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 28px !important;
+  height: 28px !important;
+  color: #e50914 !important;
+}
+
+.nav-menu-collapse #footer-my-list-btn .item-icon svg,
+.nav-menu-footer #footer-my-list-btn .item-icon svg {
+  width: 18px !important;
+  height: 18px !important;
+}
+
+.nav-menu-collapse #footer-my-list-btn .item-count,
+.nav-menu-footer #footer-my-list-btn .item-count {
+  margin-left: auto !important;
+  font-size: 0.78rem !important;
+  font-weight: 600 !important;
+  color: #ff525a !important;
+  background: rgba(229, 9, 20, 0.15) !important;
+  padding: 2px 8px !important;
+  border-radius: 9999px !important;
 }
 
 /* ==========================================================
