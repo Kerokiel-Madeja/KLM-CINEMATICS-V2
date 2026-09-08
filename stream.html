@@ -1,0 +1,687 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="KLM CINEMATICS - Experience cinema-grade streaming with dynamic navigation." />
+    <link rel="stylesheet" href="assets/css/global.css" />
+    <title>KLM CINEMATICS</title>
+  </head>
+  <body>
+    <!-- Top Navigation Container -->
+    <header class="navbar-wrapper">
+      <nav class="navbar" id="navbar" aria-label="Primary Navigation">
+        <!-- Top Bar Row -->
+        <div class="navbar-top">
+          <!-- Search Action Button -->
+          <button class="search-button" id="search-btn" type="button" aria-label="Search catalog" title="Search">
+            <svg class="search-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.3-4.3"></path>
+            </svg>
+          </button>
+
+          <!-- Brand Logo -->
+          <a href="#home" class="logo" id="site-logo">
+            <span class="logo-red">KLM</span> CINEMATICS
+          </a>
+
+          <!-- Middle Navigation Links (Desktop Default View) -->
+          <div class="mid-nav-list" id="mid-nav-list">
+            <a href="#home" class="nav-item active" data-target="home">Home</a>
+            <a href="#Movies" class="nav-item" data-target="movies">Movies</a>
+            <a href="#TV-Shows" class="nav-item" data-target="tv-shows">TV Shows</a>
+            <a href="#Anime" class="nav-item" data-target="anime">Anime</a>
+            <div class="nav-dropdown" id="genres-dropdown">
+              <button type="button" class="nav-dropdown-toggle" id="genres-dropdown-toggle" aria-expanded="false" aria-haspopup="true">
+                <span>Genres</span>
+                <svg class="nav-dropdown-icon" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </button>
+              <div class="nav-dropdown-menu" id="genres-dropdown-menu" role="menu">
+                <button type="button" class="nav-dropdown-item" data-genre="All">All Genres</button>
+                <button type="button" class="nav-dropdown-item" data-genre="Action">Action</button>
+                <button type="button" class="nav-dropdown-item" data-genre="Adventure">Adventure</button>
+                <button type="button" class="nav-dropdown-item" data-genre="Animation">Animation</button>
+                <button type="button" class="nav-dropdown-item" data-genre="Comedy">Comedy</button>
+                <button type="button" class="nav-dropdown-item" data-genre="Crime">Crime</button>
+                <button type="button" class="nav-dropdown-item" data-genre="Documentary">Documentary</button>
+                <button type="button" class="nav-dropdown-item" data-genre="Drama">Drama</button>
+                <button type="button" class="nav-dropdown-item" data-genre="Fantasy">Fantasy</button>
+                <button type="button" class="nav-dropdown-item" data-genre="Sci-Fi">Sci-Fi</button>
+                <button type="button" class="nav-dropdown-item" data-genre="Horror">Horror</button>
+                <button type="button" class="nav-dropdown-item" data-genre="Thriller">Thriller</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Navigation Area -->
+          <div class="right-nav-list" id="right-nav-list">
+            <a href="#My-List" class="nav-item my-list-btn" data-target="my-list">My List</a>
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger-btn" id="hamburger-btn" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu-collapse">
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Expanding Menu List (Expands navbar height down smoothly) -->
+        <div class="nav-menu-collapse" id="nav-menu-collapse" aria-hidden="true">
+          <div class="nav-menu-inner">
+            <div class="nav-menu-divider"></div>
+            <ul class="nav-menu-list">
+              <li class="nav-menu-row">
+                <a href="#home" class="nav-menu-item active" data-target="home">
+                  <span class="item-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                  </span>
+                  <span class="item-text">Home</span>
+                </a>
+              </li>
+              <li class="nav-menu-row">
+                <a href="#Movies" class="nav-menu-item" data-target="movies">
+                  <span class="item-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg>
+                  </span>
+                  <span class="item-text">Movies</span>
+                </a>
+              </li>
+              <li class="nav-menu-row">
+                <a href="#TV-Shows" class="nav-menu-item" data-target="tv-shows">
+                  <span class="item-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>
+                  </span>
+                  <span class="item-text">TV Shows</span>
+                </a>
+              </li>
+              <li class="nav-menu-row">
+                <a href="#Anime" class="nav-menu-item" data-target="anime">
+                  <span class="item-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                  </span>
+                  <span class="item-text">Anime</span>
+                </a>
+              </li>
+              <li class="nav-menu-row">
+                <div class="nav-menu-dropdown" id="mobile-genres-dropdown">
+                  <button type="button" class="nav-menu-item nav-menu-dropdown-toggle" id="mobile-genres-dropdown-toggle" aria-expanded="false">
+                    <span class="item-icon">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                    </span>
+                    <span class="item-text">Genres</span>
+                    <svg class="nav-dropdown-icon" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                  </button>
+                  <div class="nav-menu-dropdown-list" id="mobile-genres-dropdown-list">
+                    <button type="button" class="nav-menu-dropdown-item" data-genre="All">All Genres</button>
+                    <button type="button" class="nav-menu-dropdown-item" data-genre="Action">Action</button>
+                    <button type="button" class="nav-menu-dropdown-item" data-genre="Adventure">Adventure</button>
+                    <button type="button" class="nav-menu-dropdown-item" data-genre="Animation">Animation</button>
+                    <button type="button" class="nav-menu-dropdown-item" data-genre="Comedy">Comedy</button>
+                    <button type="button" class="nav-menu-dropdown-item" data-genre="Crime">Crime</button>
+                    <button type="button" class="nav-menu-dropdown-item" data-genre="Documentary">Documentary</button>
+                    <button type="button" class="nav-menu-dropdown-item" data-genre="Drama">Drama</button>
+                    <button type="button" class="nav-menu-dropdown-item" data-genre="Fantasy">Fantasy</button>
+                    <button type="button" class="nav-menu-dropdown-item" data-genre="Sci-Fi">Sci-Fi</button>
+                    <button type="button" class="nav-menu-dropdown-item" data-genre="Horror">Horror</button>
+                    <button type="button" class="nav-menu-dropdown-item" data-genre="Thriller">Thriller</button>
+                  </div>
+                </div>
+              </li>
+            </ul>
+
+            <!-- Quick Action Footer inside expanded menu -->
+            <div class="nav-menu-footer">
+              <a href="#My-List" class="nav-menu-item nav-menu-footer-item my-list-btn" id="footer-my-list-btn" data-target="my-list">
+                <span class="item-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                </span>
+                <span class="item-text">My List</span>
+                <span class="item-count">5 Saved</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main Content Area with Realistic Sections for Smooth Scroll Showcase -->
+    <main id="home-main">
+      <!-- Hero Section -->
+      <section class="hero-section" id="home">
+        <div class="hero-backdrop">
+          <div class="hero-gradient-overlay"></div>
+        </div>
+
+        <div class="hero-content">
+          <!-- Trending rank badge — populated by JS -->
+          <div class="hero-badge" aria-live="polite">#1 Trending Today</div>
+
+          <h1 class="hero-title">CYBERSPACE: HORIZON</h1>
+          <p class="hero-meta" aria-live="polite">
+            <span class="rating">⭐ 9.6</span>
+            <span class="dot">•</span>
+            <span>2h 28m</span>
+            <span class="dot">•</span>
+            <span class="tag">Sci-Fi Thriller</span>
+          </p>
+          <p class="hero-description" aria-live="polite">
+            In a neon-drenched metropolis governed by autonomous synthetic intelligences, a rogue cyber-detective unearths a clandestine frequency threatening the architecture of reality.
+          </p>
+          <div class="hero-actions">
+            <a href="#watch" class="btn btn-primary" id="watch-now-btn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              Watch Now
+            </a>
+            <a href="#My-List" class="btn btn-secondary" id="add-list-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              Add to My List
+            </a>
+          </div>
+        </div>
+
+        <!-- Carousel Controls (only visible after JS activates .hero-carousel-active) -->
+        <div class="hero-carousel-controls" aria-label="Hero carousel controls">
+          <!-- Prev button -->
+          <button type="button" class="hero-prev-btn" id="hero-prev-btn" aria-label="Previous slide">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+
+          <!-- Dot indicators -->
+          <div class="hero-indicators" id="hero-indicators" role="tablist" aria-label="Slide indicators"></div>
+
+          <!-- Next button -->
+          <button type="button" class="hero-next-btn" id="hero-next-btn" aria-label="Next slide">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- Movies Section -->
+      <section class="catalog-section" id="Movies">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <h2 class="section-title">Movies</h2>
+            <span class="section-subtitle">Blockbuster releases & top-rated films</span>
+          </div>
+          <a href="movies.html" class="section-more" data-category="movies">Browse all &rarr;</a>
+        </div>
+        <div class="cards-grid" id="cards-movies">
+          <div class="cinema-card" tabindex="0" role="button" aria-label="Play Interstellar Odyssey">
+            <div class="card-poster poster-1">
+              <span class="card-badge">4K UHD</span>
+              <span class="card-rating">⭐ 9.4</span>
+              <button type="button" class="card-play-center-btn" tabindex="-1" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              </button>
+            </div>
+            <div class="card-details">
+              <h3 class="card-title">Interstellar Odyssey</h3>
+              <p class="card-genre">Sci-Fi • Space Adventure</p>
+            </div>
+          </div>
+          <div class="cinema-card" tabindex="0" role="button" aria-label="Play The Shadow Protocol">
+            <div class="card-poster poster-2">
+              <span class="card-badge">DOLBY</span>
+              <span class="card-rating">⭐ 8.9</span>
+              <button type="button" class="card-play-center-btn" tabindex="-1" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              </button>
+            </div>
+            <div class="card-details">
+              <h3 class="card-title">The Shadow Protocol</h3>
+              <p class="card-genre">Espionage • Action</p>
+            </div>
+          </div>
+          <div class="cinema-card" tabindex="0" role="button" aria-label="Play Eclipse: Origins">
+            <div class="card-poster poster-3">
+              <span class="card-badge">HDR10+</span>
+              <span class="card-rating">⭐ 9.1</span>
+              <button type="button" class="card-play-center-btn" tabindex="-1" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              </button>
+            </div>
+            <div class="card-details">
+              <h3 class="card-title">Eclipse: Origins</h3>
+              <p class="card-genre">Dark Fantasy • Mystery</p>
+            </div>
+          </div>
+          <div class="cinema-card" tabindex="0" role="button" aria-label="Play Velocity Vanguard">
+            <div class="card-poster poster-4">
+              <span class="card-badge">NEW</span>
+              <span class="card-rating">⭐ 8.7</span>
+              <button type="button" class="card-play-center-btn" tabindex="-1" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              </button>
+            </div>
+            <div class="card-details">
+              <h3 class="card-title">Velocity Vanguard</h3>
+              <p class="card-genre">Heist • Thriller</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TV Shows Section -->
+      <section class="catalog-section" id="TV-Shows">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <h2 class="section-title">TV Shows</h2>
+            <span class="section-subtitle">Binge-worthy series & episodic originals</span>
+          </div>
+          <a href="tv-shows.html" class="section-more" data-category="tv-shows">Browse all &rarr;</a>
+        </div>
+        <div class="cards-grid" id="cards-tvshows">
+          <div class="cinema-card" tabindex="0" role="button" aria-label="Play Neon Dynasties">
+            <div class="card-poster poster-5">
+              <span class="card-badge">S3 NOW STREAMING</span>
+              <span class="card-rating">⭐ 9.5</span>
+              <button type="button" class="card-play-center-btn" tabindex="-1" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              </button>
+            </div>
+            <div class="card-details">
+              <h3 class="card-title">Neon Dynasties</h3>
+              <p class="card-genre">Cyberpunk • Drama</p>
+            </div>
+          </div>
+          <div class="cinema-card" tabindex="0" role="button" aria-label="Play Deep Horizon">
+            <div class="card-poster poster-6">
+              <span class="card-badge">SERIES FINALE</span>
+              <span class="card-rating">⭐ 9.2</span>
+              <button type="button" class="card-play-center-btn" tabindex="-1" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              </button>
+            </div>
+            <div class="card-details">
+              <h3 class="card-title">Deep Horizon</h3>
+              <p class="card-genre">Sci-Fi • Mystery</p>
+            </div>
+          </div>
+          <div class="cinema-card" tabindex="0" role="button" aria-label="Play Arcane Chronicles">
+            <div class="card-poster poster-7">
+              <span class="card-badge">EXCLUSIVE</span>
+              <span class="card-rating">⭐ 9.0</span>
+              <button type="button" class="card-play-center-btn" tabindex="-1" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              </button>
+            </div>
+            <div class="card-details">
+              <h3 class="card-title">Arcane Chronicles</h3>
+              <p class="card-genre">Mythology • Horror</p>
+            </div>
+          </div>
+          <div class="cinema-card" tabindex="0" role="button" aria-label="Play Midnight Syndicate">
+            <div class="card-poster poster-8">
+              <span class="card-badge">4K</span>
+              <span class="card-rating">⭐ 8.8</span>
+              <button type="button" class="card-play-center-btn" tabindex="-1" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              </button>
+            </div>
+            <div class="card-details">
+              <h3 class="card-title">Midnight Syndicate</h3>
+              <p class="card-genre">Crime • Noir</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Anime & Animation Section -->
+      <section class="catalog-section" id="Anime">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <h2 class="section-title">Anime</h2>
+            <span class="section-subtitle">Stream anime masterworks, animated features & worldwide simulcasts</span>
+          </div>
+          <a href="anime.html" class="section-more" data-category="anime">Browse all &rarr;</a>
+        </div>
+        <div class="cards-grid" id="cards-anime">
+          <div class="cinema-card" tabindex="0" role="button" aria-label="Play Bleach" data-tmdb-id="30984" data-category="anime" data-type="Anime">
+            <div class="card-poster poster-9">
+              <span class="card-badge">TOP TRENDING</span>
+              <span class="card-rating">⭐ 8.4</span>
+              <button type="button" class="card-play-center-btn" tabindex="-1" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              </button>
+            </div>
+            <div class="card-details">
+              <h3 class="card-title">Bleach</h3>
+              <p class="card-genre">Action • Fantasy • Supernatural</p>
+            </div>
+          </div>
+          <div class="cinema-card" tabindex="0" role="button" aria-label="Play One Piece" data-tmdb-id="37854" data-category="anime" data-type="Anime">
+            <div class="card-poster poster-10">
+              <span class="card-badge">TOP RATED</span>
+              <span class="card-rating">⭐ 8.7</span>
+              <button type="button" class="card-play-center-btn" tabindex="-1" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              </button>
+            </div>
+            <div class="card-details">
+              <h3 class="card-title">One Piece</h3>
+              <p class="card-genre">Action • Adventure • Shounen</p>
+            </div>
+          </div>
+          <div class="cinema-card" tabindex="0" role="button" aria-label="Play Re:ZERO -Starting Life in Another World-" data-tmdb-id="65942" data-category="anime" data-type="Anime">
+            <div class="card-poster poster-11">
+              <span class="card-badge">SUB & DUB</span>
+              <span class="card-rating">⭐ 8.1</span>
+              <button type="button" class="card-play-center-btn" tabindex="-1" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              </button>
+            </div>
+            <div class="card-details">
+              <h3 class="card-title" title="Re:ZERO -Starting Life in Another World-">Re:ZERO -Starting Life in Another World-</h3>
+              <p class="card-genre">Dark Fantasy • Mystery • Isekai</p>
+            </div>
+          </div>
+          <div class="cinema-card" tabindex="0" role="button" aria-label="Play Mushoku Tensei: Jobless Reincarnation" data-tmdb-id="94664" data-category="anime" data-type="Anime">
+            <div class="card-poster poster-12">
+              <span class="card-badge">POPULAR</span>
+              <span class="card-rating">⭐ 8.4</span>
+              <button type="button" class="card-play-center-btn" tabindex="-1" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              </button>
+            </div>
+            <div class="card-details">
+              <h3 class="card-title" title="Mushoku Tensei: Jobless Reincarnation">Mushoku Tensei: Jobless Reincarnation</h3>
+              <p class="card-genre">Fantasy • Adventure • Magic</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- My List Section -->
+      <section class="catalog-section" id="My-List">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <h2 class="section-title">My Watchlist</h2>
+            <span class="section-subtitle">Your saved titles ready for instant streaming</span>
+          </div>
+          <a href="#all-watchlist" class="section-more">Browse all &rarr;</a>
+        </div>
+        <div class="cards-grid" id="cards-watchlist">
+          <div class="cinema-card" tabindex="0" role="button" aria-label="Play Interstellar Odyssey">
+            <div class="card-poster poster-1">
+              <span class="card-badge">SAVED</span>
+              <span class="card-rating">⭐ 9.4</span>
+              <button type="button" class="card-play-center-btn" tabindex="-1" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              </button>
+            </div>
+            <div class="card-details">
+              <h3 class="card-title">Interstellar Odyssey</h3>
+              <p class="card-genre">Resume from 1h 14m</p>
+            </div>
+          </div>
+          <div class="cinema-card" tabindex="0" role="button" aria-label="Play Neon Dynasties">
+            <div class="card-poster poster-5">
+              <span class="card-badge">NEW EPISODE</span>
+              <span class="card-rating">⭐ 9.5</span>
+              <button type="button" class="card-play-center-btn" tabindex="-1" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              </button>
+            </div>
+            <div class="card-details">
+              <h3 class="card-title">Neon Dynasties</h3>
+              <p class="card-genre">S3 E4 available</p>
+            </div>
+          </div>
+          <div class="cinema-card" tabindex="0" role="button" aria-label="Play Spirit Blade: Infinite">
+            <div class="card-poster poster-9">
+              <span class="card-badge">SAVED</span>
+              <span class="card-rating">⭐ 9.7</span>
+              <button type="button" class="card-play-center-btn" tabindex="-1" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              </button>
+            </div>
+            <div class="card-details">
+              <h3 class="card-title">Spirit Blade: Infinite</h3>
+              <p class="card-genre">Episode 12 up next</p>
+            </div>
+          </div>
+          <div class="cinema-card" tabindex="0" role="button" aria-label="Play Eclipse: Origins">
+            <div class="card-poster poster-3">
+              <span class="card-badge">SAVED</span>
+              <span class="card-rating">⭐ 9.1</span>
+              <button type="button" class="card-play-center-btn" tabindex="-1" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              </button>
+            </div>
+            <div class="card-details">
+              <h3 class="card-title">Eclipse: Origins</h3>
+              <p class="card-genre">Watch in 4K HDR</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Dedicated Sub-Page Dynamic View Container -->
+    <div id="subpage-view" class="subpage-container" style="display: none;"></div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-container">
+        <div class="footer-brand">
+          <span class="logo-red">KLM</span> CINEMATICS
+        </div>
+        <p class="footer-text">
+          Crafted for high-fidelity cinema streaming. Dynamic navigation featuring fluid scroll-state transitions.
+        </p>
+        <p class="footer-copyright">&copy; 2026 KLM CINEMATICS. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- Interactive Search & Filter Modal -->
+    <div class="search-modal-backdrop" id="search-modal" aria-hidden="true" role="dialog" aria-modal="true">
+      <div class="search-modal-wrapper">
+        <!-- Circular Floating Close Button -->
+        <button class="search-modal-close" id="search-modal-close" type="button" aria-label="Close search modal">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+
+        <div class="search-modal-container">
+          <!-- Left Sidebar: Filters & Search Input -->
+          <aside class="search-filter-sidebar" id="search-filter-sidebar">
+            <!-- Pinned Top Area: Header with Toggle & Search Form -->
+            <div class="search-modal-fixed-top">
+              <div class="search-filter-header">
+                <div class="search-filter-title-group">
+                  <svg class="search-filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.3-4.3"></path>
+                  </svg>
+                  <h2 class="search-filter-title">Search & Filter</h2>
+                </div>
+              </div>
+
+              <!-- Search Form / Input Row (Always Visible) -->
+              <form class="search-modal-form" id="search-modal-form" onsubmit="return false;">
+                <div class="search-modal-input-wrap">
+                  <input
+                    type="text"
+                    id="search-modal-input"
+                    class="search-modal-input"
+                    placeholder="Search for movies, TV show"
+                    autocomplete="off"
+                  />
+                </div>
+                <button type="submit" class="search-modal-submit-btn" id="search-modal-submit-btn">Search</button>
+              </form>
+            </div>
+
+            <!-- Collapsible Filter Options Area -->
+            <div class="filter-collapsible-panel" id="filter-collapsible-panel">
+              <div class="filter-collapsible-inner">
+                <!-- Filter Section 1: Content Type -->
+                <div class="filter-section">
+                  <span class="filter-section-label">CONTENT TYPE</span>
+                  <div class="filter-pill-grid" id="content-type-filters">
+                    <button type="button" class="filter-pill-btn active" data-type="all">All</button>
+                    <button type="button" class="filter-pill-btn" data-type="Movies">Movies</button>
+                    <button type="button" class="filter-pill-btn" data-type="TV Shows">TV Shows</button>
+                    <button type="button" class="filter-pill-btn" data-type="Anime">Anime</button>
+                  </div>
+                </div>
+
+                <!-- Filter Section 2: Genre -->
+                <div class="filter-section">
+                  <span class="filter-section-label">GENRE</span>
+                  <div class="filter-genre-grid" id="genre-filters">
+                    <label class="genre-check-item">
+                      <input type="checkbox" value="Action" />
+                      <span class="genre-box">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                      </span>
+                      <span class="genre-name">Action</span>
+                    </label>
+                    <label class="genre-check-item">
+                      <input type="checkbox" value="Adventure" />
+                      <span class="genre-box">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                      </span>
+                      <span class="genre-name">Adventure</span>
+                    </label>
+                    <label class="genre-check-item">
+                      <input type="checkbox" value="Animation" />
+                      <span class="genre-box">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                      </span>
+                      <span class="genre-name">Animation</span>
+                    </label>
+                    <label class="genre-check-item">
+                      <input type="checkbox" value="Comedy" />
+                      <span class="genre-box">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                      </span>
+                      <span class="genre-name">Comedy</span>
+                    </label>
+                    <label class="genre-check-item">
+                      <input type="checkbox" value="Crime" />
+                      <span class="genre-box">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                      </span>
+                      <span class="genre-name">Crime</span>
+                    </label>
+                    <label class="genre-check-item">
+                      <input type="checkbox" value="Documentary" />
+                      <span class="genre-box">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                      </span>
+                      <span class="genre-name">Documentary</span>
+                    </label>
+                    <label class="genre-check-item">
+                      <input type="checkbox" value="Drama" />
+                      <span class="genre-box">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                      </span>
+                      <span class="genre-name">Drama</span>
+                    </label>
+                    <label class="genre-check-item">
+                      <input type="checkbox" value="Family" />
+                      <span class="genre-box">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                      </span>
+                      <span class="genre-name">Family</span>
+                    </label>
+                    <label class="genre-check-item">
+                      <input type="checkbox" value="Fantasy" />
+                      <span class="genre-box">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                      </span>
+                      <span class="genre-name">Fantasy</span>
+                    </label>
+                    <label class="genre-check-item">
+                      <input type="checkbox" value="Horror" />
+                      <span class="genre-box">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                      </span>
+                      <span class="genre-name">Horror</span>
+                    </label>
+                    <label class="genre-check-item">
+                      <input type="checkbox" value="Sci-Fi" />
+                      <span class="genre-box">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                      </span>
+                      <span class="genre-name">Sci-Fi</span>
+                    </label>
+                    <label class="genre-check-item">
+                      <input type="checkbox" value="Thriller" />
+                      <span class="genre-box">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                      </span>
+                      <span class="genre-name">Thriller</span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Reset Filters -->
+                <button type="button" class="reset-filters-btn" id="reset-filters-btn">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                    <path d="M3 3v5h5"></path>
+                  </svg>
+                  Reset Filters
+                </button>
+              </div>
+            </div>
+
+            <!-- Mobile Drawer Handle / Shrink Tab Button -->
+            <div class="filter-shrink-tab-wrap">
+              <button
+                type="button"
+                class="filter-shrink-btn"
+                id="filter-shrink-btn"
+                aria-label="Hide filter"
+                title="Hide filter"
+              >
+                <span class="filter-shrink-text" id="filter-shrink-text">Hide filter</span>
+                <svg class="shrink-arrow-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 4l-7 7h4v9h6v-9h4l-7-7z"/>
+                </svg>
+              </button>
+            </div>
+          </aside>
+
+          <!-- Right Area: Results Grid -->
+          <section class="search-results-area" aria-label="Search results">
+            <!-- Dynamic Results Container -->
+            <div class="search-results-grid" id="search-results-grid">
+              <!-- Rendered dynamically by JavaScript -->
+            </div>
+
+            <!-- Empty State Container -->
+            <div class="search-empty-state" id="search-empty-state" style="display: none;">
+              <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.3-4.3"></path>
+                <line x1="8" y1="11" x2="14" y2="11"></line>
+              </svg>
+              <h3>No titles found</h3>
+              <p>Try adjusting your search query or unchecking some genre filters.</p>
+              <button type="button" class="empty-reset-btn" id="empty-reset-btn">Reset All Filters</button>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <script src="assets/js/navbar.js"></script>
+    <script src="assets/js/subpages.js"></script>
+    <!-- TMDB Watchlist Engine & Modal -->
+    <script src="assets/js/watchlist.js"></script>
+    <!-- TMDB Hero Carousel -->
+    <script src="assets/js/hero-carousel.js"></script>
+    <!-- TMDB Catalog Cards -->
+    <script src="assets/js/catalog-cards.js"></script>
+  </body>
+</html>

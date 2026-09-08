@@ -1,0 +1,78 @@
+@import url("./style.css");
+@import url("./components.css");
+@import url("./responsive.css");
+@import url("./animation.css");
+@import url("./subpages.css");
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap");
+
+:root {
+  /* Fonts */
+  --font-display: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  /* Colors */
+  --red: #e50914;
+  --red-hover: #ff1e27;
+  --red-glow: rgba(229, 9, 20, 0.4);
+  --red-subtle: rgba(229, 9, 20, 0.15);
+  --black: #0a0a0e;
+  --dark: #121218;
+  --dark-card: #181822;
+  --dark-card-hover: #222230;
+  --dark-glass: rgba(14, 14, 20, 0.78);
+  --dark-glass-scrolled: rgba(12, 12, 18, 0.88);
+  --gray: #8c8c9e;
+  --light: #c8c8d8;
+  --white: #ffffff;
+  --accent: rgba(255, 255, 255, 0.08);
+  --accent-hover: rgba(255, 255, 255, 0.15);
+  --border-glass: rgba(255, 255, 255, 0.12);
+  --border-glass-scrolled: rgba(255, 255, 255, 0.16);
+
+  /* Spacing */
+  --xxs: 0.25rem;
+  --xs: 0.5rem;
+  --sm: 1rem;
+  --md: 1.5rem;
+  --lg: 2rem;
+  --xl: 3rem;
+  --xxl: 4rem;
+
+  /* Transitions & Animation Easing */
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-nav: all 0.4s var(--ease-spring);
+}
+
+/* Global Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--black);
+  color: var(--white);
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Link reset */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+}

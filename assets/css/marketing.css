@@ -1,0 +1,2326 @@
+/* ===================================================================
+   KLM CINEMATICS — Marketing & Discovery Homepage Styles (marketing.css)
+   Aesthetic: Cinema Grade Glassmorphism, Crimson Glow, Modern Typography
+   =================================================================== */
+
+/* ── Sticky Header Scroll State: Floating Capsule ─────────────────────── */
+/* In scrolled state, navbar shrinks into a sleek floating capsule pill containing all items */
+.marketing-page .navbar.scrolled {
+  margin-top: 14px !important;
+  width: fit-content !important;
+  max-width: min(1060px, calc(100% - 32px)) !important;
+  min-width: unset !important;
+  min-height: unset !important;
+  height: auto !important;
+  padding: 6px 16px 6px 22px !important;
+  border-radius: 9999px !important;
+  background: rgba(14, 14, 20, 0.94) !important;
+  backdrop-filter: blur(24px) saturate(190%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(190%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  box-shadow:
+    0 16px 44px -4px rgba(0, 0, 0, 0.8),
+    0 0 24px -2px rgba(229, 9, 20, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.4s var(--ease-spring, cubic-bezier(0.16, 1, 0.3, 1)) !important;
+}
+
+.marketing-page .navbar.scrolled .navbar-top {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 16px !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Visibility & Flex Order on Desktop/Tablet:
+   1. Brand Logo: Strictly anchored on the far LEFT
+   2. Nav Links: Centered in the middle
+   3. CTA Button: Strictly anchored on the far RIGHT & fully visible without truncation */
+@media (min-width: 769px) {
+  .marketing-page .navbar.scrolled .logo {
+    order: 1 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    font-size: 1.05rem !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.01em !important;
+    white-space: nowrap !important;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    flex-shrink: 0 !important;
+    margin: 0 14px 0 0 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .marketing-page .navbar.scrolled .logo .logo-red {
+    color: #e50914 !important;
+  }
+
+  .marketing-page .navbar.scrolled .mid-nav-list {
+    order: 2 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 4px !important;
+    margin: 0 auto !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* Universal consistent nav-item style across both unscrolled and scrolled states
+     (Prevents any border interpolation or white artifact flash when scrolled navbar is activated) */
+  .marketing-page .navbar .mid-nav-list .nav-item,
+  .marketing-page .navbar.scrolled .mid-nav-list .nav-item {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+    color: #b0b0c2 !important;
+    padding: 6px 14px !important;
+    border-radius: 9999px !important;
+    text-decoration: none !important;
+    white-space: nowrap !important;
+    border: 1px solid transparent !important;
+    outline: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+    transition: color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease !important;
+  }
+
+  .marketing-page .navbar .mid-nav-list .nav-item:focus,
+  .marketing-page .navbar.scrolled .mid-nav-list .nav-item:focus,
+  .marketing-page .navbar .mid-nav-list .nav-item:focus-visible,
+  .marketing-page .navbar.scrolled .mid-nav-list .nav-item:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  .marketing-page .navbar .mid-nav-list .nav-item:hover,
+  .marketing-page .navbar.scrolled .mid-nav-list .nav-item:hover {
+    color: #ffffff !important;
+    background: rgba(229, 9, 20, 0.15) !important;
+    border-color: transparent !important;
+  }
+
+  /* Active Capsule Pill Highlight (Real-time Scroll Spy Sync - Crimson Gradient & Zero White Borders) */
+  .marketing-page .navbar .mid-nav-list .nav-item.active,
+  .marketing-page .navbar.scrolled .mid-nav-list .nav-item.active {
+    background: linear-gradient(135deg, rgba(229, 9, 20, 0.95) 0%, rgba(168, 5, 14, 0.95) 100%) !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    box-shadow: 0 2px 12px rgba(229, 9, 20, 0.45) !important;
+    border: 1px solid rgba(229, 9, 20, 0.5) !important;
+    outline: none !important;
+  }
+
+  .marketing-page .navbar.scrolled .right-nav-list {
+    order: 3 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    margin: 0 0 0 14px !important;
+    flex-shrink: 0 !important;
+    width: auto !important;
+    min-width: fit-content !important;
+    overflow: visible !important;
+  }
+
+  .marketing-page .navbar.scrolled .nav-cta-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 7px 18px !important;
+    font-size: 0.84rem !important;
+    font-weight: 700 !important;
+    border-radius: 9999px !important;
+    letter-spacing: 0.02em !important;
+    white-space: nowrap !important;
+    background: linear-gradient(135deg, #e50914 0%, #b80610 100%) !important;
+    box-shadow: 0 4px 16px rgba(229, 9, 20, 0.5) !important;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    flex-shrink: 0 !important;
+    width: auto !important;
+    height: auto !important;
+  }
+
+  .marketing-page .navbar.scrolled .nav-cta-btn svg {
+    width: 14px !important;
+    height: 14px !important;
+    fill: currentColor !important;
+    flex-shrink: 0 !important;
+  }
+
+  .marketing-page .navbar.scrolled .nav-cta-btn span {
+    display: inline !important;
+    white-space: nowrap !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  .marketing-page .navbar.scrolled .hamburger-btn {
+    display: none !important;
+  }
+}
+
+/* On mobile screens (<= 768px): compact floating capsule with logo + hamburger */
+/* On mobile screens (<= 768px): normal and scrolled navbar states */
+@media (max-width: 768px) {
+  /* Normal (unscrolled) state on mobile:
+     nav-cta-btn is hidden from top bar (accessible inside hamburger drawer) */
+  .marketing-page .navbar:not(.scrolled) .nav-cta-btn {
+    display: none !important;
+  }
+
+  .marketing-page .navbar:not(.scrolled) .mid-nav-list {
+    display: none !important;
+  }
+
+  .marketing-page .navbar:not(.scrolled) .right-nav-list {
+    margin-left: auto !important;
+  }
+
+  /* Scrolled floating capsule on mobile:
+     [ Circular Red Play CTA (Left / order 1) ] [ Logo (Dead Center / order 2) ] [ Hamburger (Right / order 3) ] */
+  .marketing-page .navbar.scrolled {
+    width: min(440px, calc(100% - 24px)) !important;
+    border-radius: 9999px !important;
+    padding: 6px 12px !important;
+  }
+
+  .marketing-page .navbar.scrolled .navbar-top {
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    min-height: 38px !important;
+  }
+
+  .marketing-page .navbar.scrolled .mid-nav-list {
+    display: none !important;
+  }
+
+  /* Flatten right-nav-list so CTA button and hamburger become direct flex items of navbar-top */
+  .marketing-page .navbar.scrolled .right-nav-list {
+    display: contents !important;
+  }
+
+  /* 1. nav-cta-btn: on the LEFT (order: 1) - circular red button with centered play icon */
+  .marketing-page .navbar.scrolled .nav-cta-btn {
+    order: 1 !important;
+    position: relative !important;
+    z-index: 3 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    min-height: 38px !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+    background: linear-gradient(135deg, #e50914 0%, #b80610 100%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    box-shadow: 0 3px 12px rgba(229, 9, 20, 0.5), 0 0 8px rgba(229, 9, 20, 0.3) !important;
+    flex-shrink: 0 !important;
+    margin: 0 !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+  }
+
+  .marketing-page .navbar.scrolled .nav-cta-btn:hover,
+  .marketing-page .navbar.scrolled .nav-cta-btn:active {
+    transform: scale(1.08) !important;
+    box-shadow: 0 4px 16px rgba(229, 9, 20, 0.7) !important;
+  }
+
+  .marketing-page .navbar.scrolled .nav-cta-btn svg {
+    width: 16px !important;
+    height: 16px !important;
+    fill: #ffffff !important;
+    margin: 0 !important;
+    transform: translateX(1px) !important; /* Optical centering for play triangle */
+  }
+
+  .marketing-page .navbar.scrolled .nav-cta-btn span {
+    display: none !important;
+  }
+
+  /* 2. logo: strictly DEAD CENTER of the capsule (absolute 50% horizontal lock) */
+  .marketing-page .navbar.scrolled .logo {
+    order: 2 !important;
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 !important;
+    text-align: center !important;
+    font-size: 0.95rem !important;
+    font-weight: 800 !important;
+    white-space: nowrap !important;
+    letter-spacing: -0.01em !important;
+    z-index: 2 !important;
+    pointer-events: auto !important;
+  }
+
+  /* 3. hamburger-btn: on the RIGHT (order: 3) */
+  .marketing-page .navbar.scrolled .hamburger-btn {
+    order: 3 !important;
+    position: relative !important;
+    z-index: 3 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    min-height: 38px !important;
+    flex-shrink: 0 !important;
+    margin: 0 0 0 auto !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .marketing-page .navbar.scrolled.menu-open {
+    border-radius: 28px !important;
+    padding: 8px 18px 18px !important;
+  }
+}
+
+/* ── Mobile Drawer My List Action ───────────────────────────────── */
+.marketing-page .nav-menu-collapse #footer-my-list-btn,
+.marketing-page .nav-menu-collapse .my-list-btn {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  padding: 10px 14px !important;
+  border-radius: 12px !important;
+  color: #c8c8d8 !important;
+  font-size: 0.95rem !important;
+  font-weight: 500 !important;
+  text-decoration: none !important;
+  background: rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  transition: all 0.2s ease !important;
+}
+
+.marketing-page .nav-menu-collapse #footer-my-list-btn:hover,
+.marketing-page .nav-menu-collapse .my-list-btn:hover {
+  background: rgba(229, 9, 20, 0.16) !important;
+  border-color: rgba(229, 9, 20, 0.4) !important;
+  color: #ffffff !important;
+}
+
+.marketing-page .nav-menu-collapse #footer-my-list-btn .item-icon {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 28px !important;
+  height: 28px !important;
+  color: #e50914 !important;
+}
+
+.marketing-page .nav-menu-collapse #footer-my-list-btn .item-icon svg {
+  width: 18px !important;
+  height: 18px !important;
+}
+
+.marketing-page .nav-menu-collapse #footer-my-list-btn .item-count {
+  margin-left: auto !important;
+  font-size: 0.78rem !important;
+  font-weight: 600 !important;
+  color: #ff525a !important;
+  background: rgba(229, 9, 20, 0.15) !important;
+  padding: 2px 8px !important;
+  border-radius: 9999px !important;
+}
+
+/* ── Glowing Navbar Conversion CTA Button ───────────────────────── */
+.nav-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #e50914 0%, #b80610 100%);
+  color: #ffffff !important;
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  padding: 8px 18px;
+  border-radius: 9999px;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 18px rgba(229, 9, 20, 0.45), 0 0 0 1px rgba(229, 9, 20, 0.2);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-cta-btn::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 60%);
+  opacity: 0;
+  transform: scale(0.5);
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.nav-cta-btn:hover {
+  background: linear-gradient(135deg, #ff1e27 0%, #e50914 100%);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 6px 24px rgba(229, 9, 20, 0.65), 0 0 16px rgba(229, 9, 20, 0.4);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.nav-cta-btn:hover::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.nav-cta-btn svg {
+  width: 15px;
+  height: 15px;
+  fill: currentColor;
+  transition: transform 0.2s ease;
+}
+
+.nav-cta-btn:hover svg {
+  transform: scale(1.15);
+}
+
+/* ── Hero Dynamic Backdrop Slider ───────────────────────────────── */
+.mkt-hero {
+  position: relative;
+  min-height: clamp(620px, 86vh, 920px);
+  display: flex;
+  align-items: center;
+  padding: 130px clamp(1rem, 4vw, 3.5rem) 70px;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: #08080c;
+}
+
+.mkt-hero-backdrops {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.mkt-hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: scale(1.04);
+  transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), transform 6s cubic-bezier(0.25, 1, 0.5, 1);
+  pointer-events: none;
+  background-size: cover;
+  background-position: center 25%;
+  background-repeat: no-repeat;
+}
+
+.mkt-hero-slide.active {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+.mkt-hero-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background:
+    radial-gradient(ellipse at 80% 20%, rgba(229, 9, 20, 0.15) 0%, transparent 60%),
+    linear-gradient(to top, #0a0a0e 0%, rgba(10, 10, 14, 0.85) 40%, rgba(10, 10, 14, 0.3) 100%),
+    linear-gradient(to right, #0a0a0e 0%, rgba(10, 10, 14, 0.95) 38%, rgba(10, 10, 14, 0.35) 75%, transparent 100%);
+  pointer-events: none;
+}
+
+.mkt-hero-container {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+
+.mkt-hero-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  max-width: 720px;
+}
+
+.mkt-hero-pill-badge {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(229, 9, 20, 0.16);
+  border: 1px solid rgba(229, 9, 20, 0.4);
+  border-radius: 9999px;
+  color: #ff4751;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  backdrop-filter: blur(8px);
+}
+
+.mkt-hero-pill-badge .pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #e50914;
+  box-shadow: 0 0 10px #e50914;
+  animation: pulse-dot-anim 2s infinite;
+}
+
+@keyframes pulse-dot-anim {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.75); }
+}
+
+.mkt-hero-headline {
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: clamp(2.2rem, 4.4vw, 3.8rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  color: #ffffff;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+}
+
+.mkt-hero-headline .highlight-gradient {
+  background: linear-gradient(135deg, #ffffff 30%, #ff525a 80%, #e50914 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline;
+}
+
+.mkt-hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.95rem;
+  color: #b0b0c2;
+  font-weight: 500;
+}
+
+.mkt-hero-meta .rating-tag {
+  color: #ffc107;
+  font-weight: 700;
+  background: rgba(255, 193, 7, 0.14);
+  padding: 3px 9px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 193, 7, 0.3);
+}
+
+.mkt-hero-meta .badge-4k {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.mkt-hero-subheadline {
+  font-size: clamp(1rem, 1.25vw, 1.15rem);
+  line-height: 1.6;
+  color: #c0c0d4;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.mkt-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-top: 0.5rem;
+}
+
+.mkt-btn-primary {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #e50914 0%, #a8050e 100%);
+  color: #ffffff !important;
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: clamp(0.92rem, 1.2vw, 1.05rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 13px 28px;
+  min-height: 48px;
+  border-radius: 9999px;
+  text-decoration: none;
+  white-space: nowrap;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  box-shadow: 0 6px 26px rgba(229, 9, 20, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.35);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+  cursor: pointer;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.mkt-btn-primary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.22) 0%, transparent 65%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.mkt-btn-primary:hover {
+  background: linear-gradient(135deg, #ff1e27 0%, #cc0812 100%);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 36px rgba(229, 9, 20, 0.75), inset 0 1px 1px rgba(255, 255, 255, 0.5);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.mkt-btn-primary:hover::before {
+  opacity: 1;
+}
+
+.mkt-btn-primary:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.mkt-btn-primary svg {
+  width: 17px;
+  height: 17px;
+  fill: currentColor;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.mkt-btn-primary:hover svg {
+  transform: scale(1.15);
+}
+
+.mkt-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  color: #ffffff !important;
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 14px 26px;
+  border-radius: 9999px;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.mkt-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.mkt-btn-secondary svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Hero Live Spotlight Card (Right side preview) */
+.mkt-hero-spotlight {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.mkt-spotlight-card {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  border-radius: 20px;
+  background: rgba(20, 20, 28, 0.75);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(229, 9, 20, 0.2);
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mkt-spotlight-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(229, 9, 20, 0.4);
+}
+
+.mkt-spotlight-poster {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background-size: cover;
+  background-position: center;
+  background-color: #1a1a24;
+}
+
+.mkt-spotlight-play-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+
+.mkt-spotlight-play-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(229, 9, 20, 0.9);
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 24px rgba(229, 9, 20, 0.7);
+  transition: transform 0.25s ease, background 0.25s ease;
+  cursor: pointer;
+}
+
+.mkt-spotlight-card:hover .mkt-spotlight-play-btn {
+  transform: scale(1.15);
+  background: #ff1e27;
+}
+
+.mkt-spotlight-play-btn svg {
+  width: 22px;
+  height: 22px;
+  margin-left: 2px;
+}
+
+.mkt-spotlight-body {
+  padding: 1.25rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mkt-spotlight-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #ff4751;
+  letter-spacing: 0.05em;
+}
+
+.mkt-spotlight-title {
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+}
+
+.mkt-spotlight-desc {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: #a4a4ba;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Slider Controls Bar */
+.mkt-hero-slider-bar {
+  position: absolute;
+  bottom: 24px;
+  left: 0;
+  width: 100%;
+  z-index: 4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+}
+
+.mkt-hero-nav-arrow {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(20, 20, 28, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: all 0.25s ease;
+}
+
+.mkt-hero-nav-arrow:hover {
+  background: rgba(229, 9, 20, 0.8);
+  border-color: #e50914;
+  transform: scale(1.1);
+}
+
+.mkt-hero-nav-arrow svg {
+  width: 18px;
+  height: 18px;
+}
+
+.mkt-slider-dots {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.mkt-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.25);
+  border: none;
+  cursor: pointer;
+  transition: all 0.35s ease;
+  padding: 0;
+}
+
+.mkt-dot.active {
+  width: 32px;
+  background: #e50914;
+  box-shadow: 0 0 10px rgba(229, 9, 20, 0.6);
+}
+
+/* ── Common Section Container & Headings ────────────────────────── */
+.mkt-section {
+  padding: clamp(3.5rem, 6vw, 5.5rem) clamp(1rem, 4vw, 3.5rem);
+  max-width: 1440px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.mkt-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 2rem;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.mkt-section-title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mkt-section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ff4751;
+}
+
+.mkt-section-title {
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: clamp(1.6rem, 2.5vw, 2.3rem);
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+
+.mkt-section-subtitle {
+  font-size: 0.98rem;
+  color: #9898ad;
+  max-width: 600px;
+  line-height: 1.5;
+}
+
+.mkt-section-cta-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #ff3b44;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: rgba(229, 9, 20, 0.08);
+  border: 1px solid rgba(229, 9, 20, 0.2);
+}
+
+.mkt-section-cta-link:hover {
+  color: #ffffff;
+  background: #e50914;
+  border-color: #e50914;
+  transform: translateX(4px);
+}
+
+/* ── Interactive Tabs for Movies / TV Shows / Anime ──────────────── */
+.mkt-tabs-wrapper {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin-bottom: 1.75rem;
+}
+
+.mkt-tabs-dropdown-btn {
+  display: none;
+}
+
+.mkt-tabs {
+  display: inline-flex;
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  background: rgba(24, 24, 34, 0.85);
+  padding: 5px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  margin-bottom: 0;
+  gap: 6px;
+}
+
+.mkt-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.mkt-tab-btn {
+  background: transparent;
+  border: none;
+  color: #9c9cb4;
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: 0.92rem;
+  font-weight: 600;
+  padding: 8px 22px;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+}
+
+.mkt-tab-btn.active {
+  background: #e50914;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(229, 9, 20, 0.4);
+}
+
+.mkt-tab-btn:hover:not(.active) {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* ── Trending Media Cards Grid (TMDB) ───────────────────────────── */
+/* Desktop Big Screen: Exactly 10 cards arranged in 2 equal rows of 5 cards */
+.mkt-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(0.85rem, 1.8vw, 1.4rem);
+}
+
+.mkt-media-card {
+  position: relative;
+  background: #14141d;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.mkt-media-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: rgba(229, 9, 20, 0.45);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 20px rgba(229, 9, 20, 0.25);
+}
+
+.mkt-card-media-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  background: #1e1e2c;
+}
+
+.mkt-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  display: block;
+}
+
+.mkt-media-card:hover .mkt-card-img {
+  transform: scale(1.08);
+}
+
+.mkt-card-badge-rating {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(10, 10, 16, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 193, 7, 0.4);
+  color: #ffc107;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 6px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.mkt-card-badge-type {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(229, 9, 20, 0.85);
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 3px 7px;
+  border-radius: 4px;
+  z-index: 2;
+  letter-spacing: 0.04em;
+}
+
+.mkt-card-play-hover {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(8, 8, 12, 0.96) 0%, rgba(8, 8, 12, 0.55) 55%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 1rem 0.85rem;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  z-index: 3;
+}
+
+.mkt-media-card:hover .mkt-card-play-hover {
+  opacity: 1;
+}
+
+/* Overhauled "Stream on KLM" Media Card CTA Button */
+.mkt-stream-now-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  background: linear-gradient(135deg, #e50914 0%, #a8050e 100%);
+  color: #ffffff !important;
+  font-family: var(--font-display, "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
+  font-size: clamp(0.78rem, 2vw, 0.86rem);
+  font-weight: 700;
+  letter-spacing: 0.025em;
+  padding: 10px 16px;
+  border-radius: 9999px;
+  text-decoration: none;
+  white-space: nowrap;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow: 0 4px 18px rgba(229, 9, 20, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+  cursor: pointer;
+  overflow: hidden;
+  line-height: 1.2;
+}
+
+.mkt-stream-now-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.mkt-stream-now-btn:hover {
+  background: linear-gradient(135deg, #ff1e27 0%, #cc0812 100%);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 26px rgba(229, 9, 20, 0.75), inset 0 1px 1px rgba(255, 255, 255, 0.45);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.mkt-stream-now-btn:hover::before {
+  opacity: 1;
+}
+
+.mkt-stream-now-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.mkt-stream-now-btn svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+  flex-shrink: 0;
+  display: block;
+  transition: transform 0.2s ease;
+}
+
+.mkt-stream-now-btn:hover svg {
+  transform: scale(1.15);
+}
+
+.mkt-stream-now-btn span {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-shrink: 1;
+}
+
+@media (max-width: 768px) {
+  .mkt-card-play-hover {
+    padding: 0.75rem 0.6rem;
+  }
+  .mkt-stream-now-btn {
+    padding: 8px 12px;
+    font-size: 0.78rem;
+    gap: 6px;
+  }
+  .mkt-stream-now-btn svg {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+.mkt-card-body {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.mkt-card-title {
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.mkt-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: #8c8c9e;
+}
+
+.mkt-card-genres {
+  font-size: 0.78rem;
+  color: #ff858a;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── Featured Actors & Celebrities Section ──────────────────────── */
+/* Desktop Big Screen: Exactly 10 cards arranged in 2 equal rows of 5 cards */
+.mkt-actors-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(0.85rem, 1.8vw, 1.4rem);
+}
+
+.mkt-actor-card {
+  background: #14141d;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.mkt-actor-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(229, 9, 20, 0.45);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 20px rgba(229, 9, 20, 0.2);
+}
+
+.mkt-actor-portrait-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1.15;
+  overflow: hidden;
+  background: #1e1e2c;
+}
+
+.mkt-actor-portrait {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  display: block;
+}
+
+.mkt-actor-card:hover .mkt-actor-portrait {
+  transform: scale(1.08);
+}
+
+.mkt-actor-pop-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(10, 10, 16, 0.85);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ff4751;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.mkt-actor-body {
+  padding: 1.15rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.mkt-actor-name {
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+}
+
+.mkt-actor-dept {
+  font-size: 0.78rem;
+  color: #ff858a;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+
+.mkt-actor-known-for {
+  margin-top: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 8px;
+}
+
+.mkt-known-label {
+  font-size: 0.7rem;
+  color: #8c8c9e;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.mkt-known-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.mkt-known-pill {
+  font-size: 0.73rem;
+  background: rgba(255, 255, 255, 0.06);
+  color: #d0d0e2;
+  padding: 2px 7px;
+  border-radius: 4px;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+/* ── Latest Movie News (GNews API) ──────────────────────────────── */
+/* Desktop Big Screen: Exactly 6 cards arranged in 2 equal rows of 3 cards */
+.mkt-news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.1rem, 2vw, 1.8rem);
+}
+
+.mkt-news-card {
+  background: #14141d;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.mkt-news-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(229, 9, 20, 0.4);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 24px rgba(229, 9, 20, 0.18);
+}
+
+.mkt-news-thumb-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #1a1a26;
+  overflow: hidden;
+}
+
+.mkt-news-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  display: block;
+}
+
+.mkt-news-card:hover .mkt-news-thumb {
+  transform: scale(1.06);
+}
+
+.mkt-news-source-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(14, 14, 20, 0.85);
+  backdrop-filter: blur(8px);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  letter-spacing: 0.03em;
+  z-index: 2;
+}
+
+.mkt-news-body {
+  padding: 1.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.mkt-news-date {
+  font-size: 0.78rem;
+  color: #8c8c9e;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mkt-news-headline {
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: 1.12rem;
+  font-weight: 700;
+  line-height: 1.38;
+  color: #ffffff;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color 0.2s ease;
+}
+
+.mkt-news-card:hover .mkt-news-headline {
+  color: #ff525a;
+}
+
+.mkt-news-snippet {
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: #a4a4ba;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.mkt-news-footer {
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.mkt-news-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #ff3b44;
+  text-decoration: none;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.mkt-news-link:hover {
+  color: #ff6b72;
+  transform: translateX(4px);
+}
+
+/* ── Editorial Reviews & Guides Section ─────────────────────────── */
+.mkt-editorial-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.75rem;
+}
+
+.mkt-review-card {
+  background: #14141d;
+  border-radius: 18px;
+  padding: 1.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: all 0.3s ease;
+}
+
+.mkt-review-card:hover {
+  border-color: rgba(229, 9, 20, 0.35);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.5);
+}
+
+.mkt-review-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mkt-critic-score {
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #ffc107;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mkt-verdict-pill {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: rgba(76, 175, 80, 0.15);
+  color: #4caf50;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+.mkt-review-film-title {
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.mkt-review-quote {
+  font-style: italic;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: #c4c4d8;
+  position: relative;
+  padding-left: 14px;
+  border-left: 3px solid #e50914;
+}
+
+.mkt-review-author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.84rem;
+  color: #8c8c9e;
+  margin-top: auto;
+}
+
+.mkt-author-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #e50914, #ff5e62);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+/* Guides / Watch Order Box */
+.mkt-guide-box {
+  background: linear-gradient(135deg, #181826 0%, #101018 100%);
+  border-radius: 18px;
+  padding: 1.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.mkt-guide-box-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mkt-guide-badge {
+  background: rgba(229, 9, 20, 0.15);
+  color: #ff4751;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(229, 9, 20, 0.3);
+}
+
+.mkt-timeline-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+  padding-left: 20px;
+}
+
+.mkt-timeline-list::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  bottom: 6px;
+  left: 6px;
+  width: 2px;
+  background: rgba(229, 9, 20, 0.4);
+}
+
+.mkt-timeline-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mkt-timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -19px;
+  top: 5px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #e50914;
+  box-shadow: 0 0 8px #e50914;
+}
+
+.mkt-timeline-step-title {
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.mkt-timeline-step-desc {
+  font-size: 0.8rem;
+  color: #8c8c9e;
+}
+
+/* ── Conversion Banner (Bottom of Page) ─────────────────────────── */
+.mkt-conversion-banner {
+  margin: 3rem auto;
+  max-width: 1360px;
+  border-radius: 0 !important;
+  background:
+    radial-gradient(ellipse at top right, rgba(229, 9, 20, 0.35) 0%, transparent 60%),
+    linear-gradient(135deg, #1b1b26 0%, #0d0d14 100%);
+  border: 1px solid rgba(229, 9, 20, 0.35);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(229, 9, 20, 0.25);
+  padding: clamp(2.5rem, 5vw, 4.5rem) clamp(1.5rem, 4vw, 3.5rem);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.mkt-banner-content {
+  position: relative;
+  z-index: 2;
+  max-width: 760px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.mkt-banner-title {
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.15;
+  border-radius: 0 !important;
+}
+
+.mkt-banner-desc {
+  font-size: 1.08rem;
+  color: #c4c4d8;
+  line-height: 1.6;
+}
+
+/* ── Compliance Footer ──────────────────────────────────────────── */
+.mkt-footer {
+  background: #09090d;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 4rem clamp(1rem, 4vw, 3.5rem) 2.5rem;
+  color: #8c8c9e;
+  font-size: 0.9rem;
+}
+
+.mkt-footer-container {
+  max-width: 1200px;
+  margin: 0 auto 3rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(2rem, 5vw, 4.5rem);
+  justify-content: center;
+  justify-items: center;
+  text-align: center;
+}
+
+.mkt-footer-brand-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 420px;
+}
+
+.mkt-footer-brand {
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #ffffff;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.mkt-footer-desc {
+  line-height: 1.6;
+  max-width: 380px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.mkt-footer-brand-col div,
+.mkt-footer-cta-wrap {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.mkt-footer-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.9rem;
+  width: 100%;
+  max-width: 320px;
+}
+
+.mkt-footer-heading {
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-align: center;
+  width: 100%;
+}
+
+.mkt-footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.65rem;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.mkt-footer-links li {
+  width: 100%;
+  text-align: center;
+}
+
+.mkt-footer-links a {
+  color: #8c8c9e;
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: inline-block;
+  cursor: pointer;
+  text-align: center;
+}
+
+.mkt-footer-links a:hover {
+  color: #ff3b44;
+  transform: translateY(-2px);
+}
+
+.mkt-footer-bottom {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.25rem;
+  font-size: 0.82rem;
+}
+
+.mkt-footer-badges {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.mkt-attribution-pill {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 4px 10px;
+  border-radius: 6px;
+  color: #b0b0c2;
+  font-size: 0.75rem;
+}
+
+/* ── Interactive Trailer Modal & Compliance Modal ───────────────── */
+.mkt-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(12px);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.mkt-modal-backdrop.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mkt-modal-dialog {
+  background: #14141e;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(229, 9, 20, 0.3);
+  position: relative;
+  transform: scale(0.95);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mkt-modal-backdrop.active .mkt-modal-dialog {
+  transform: scale(1);
+}
+
+.mkt-modal-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s ease;
+}
+
+.mkt-modal-close-btn:hover {
+  background: #e50914;
+  transform: scale(1.1);
+}
+
+.mkt-video-wrapper {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+  background: #000000;
+  border-radius: 19px 19px 0 0;
+  overflow: hidden;
+}
+
+.mkt-video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.mkt-modal-info {
+  padding: 1.5rem 1.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mkt-modal-title {
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.mkt-modal-text {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #b4b4c8;
+}
+
+/* Skeleton Loading Shimmer */
+.mkt-skeleton {
+  background: linear-gradient(90deg, #181824 25%, #252538 50%, #181824 75%);
+  background-size: 200% 100%;
+  animation: mkt-shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+
+@keyframes mkt-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes mktDropdownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Mobile-First Responsive Queries ────────────────────────────── */
+@media (max-width: 1024px) {
+  .mkt-hero-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+    justify-items: center;
+  }
+
+  .mkt-hero-info {
+    max-width: 100%;
+    align-items: center;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .mkt-hero-pill-badge {
+    align-self: center;
+    margin: 0 auto;
+  }
+
+  .mkt-hero-headline {
+    text-align: center;
+    width: 100%;
+  }
+
+  .mkt-hero-meta {
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+  }
+
+  .mkt-hero-subheadline {
+    text-align: center;
+    max-width: 620px;
+    margin: 0 auto;
+  }
+
+  .mkt-hero-actions {
+    justify-content: center;
+    margin: 0.5rem auto 0;
+  }
+
+  .mkt-hero-spotlight {
+    display: none;
+  }
+
+  .mkt-footer-container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    justify-items: center;
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .mkt-hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 105px 1.25rem 40px;
+    min-height: auto;
+    box-sizing: border-box;
+  }
+
+  .mkt-hero-scrim {
+    background:
+      radial-gradient(ellipse at 50% 30%, rgba(229, 9, 20, 0.12) 0%, transparent 70%),
+      linear-gradient(to bottom, rgba(10, 10, 14, 0.6) 0%, rgba(10, 10, 14, 0.82) 50%, #0a0a0e 100%);
+  }
+
+  .mkt-hero-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .mkt-hero-info {
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .mkt-hero-pill-badge {
+    align-self: center;
+    margin: 0 auto;
+    font-size: 0.76rem;
+    padding: 5px 12px;
+  }
+
+  .mkt-hero-headline {
+    font-size: clamp(1.9rem, 6.5vw, 2.6rem);
+    text-align: center;
+    width: 100%;
+    margin: 0 auto;
+    word-break: break-word;
+  }
+
+  .mkt-hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 8px 10px;
+    width: 100%;
+    margin: 0 auto;
+    font-size: 0.88rem;
+  }
+
+  .mkt-hero-meta .rating-tag,
+  .mkt-hero-meta .badge-4k {
+    white-space: nowrap;
+  }
+
+  .mkt-hero-subheadline {
+    text-align: center;
+    font-size: 0.96rem;
+    line-height: 1.55;
+    max-width: 520px;
+    margin: 0 auto;
+    color: #c0c0d4;
+  }
+
+  .mkt-hero-actions {
+    flex-direction: column;
+    width: 100%;
+    max-width: 420px;
+    margin: 0.5rem auto 0;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .mkt-btn-primary, .mkt-btn-secondary {
+    width: 100%;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 12px 20px;
+    font-size: 0.95rem;
+  }
+
+  .mkt-hero-slider-bar {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    margin-top: 1.75rem;
+    margin-bottom: 0.5rem;
+    gap: 14px;
+    width: 100%;
+    justify-content: center;
+    z-index: 4;
+  }
+
+  .mkt-hero-nav-arrow {
+    width: 36px;
+    height: 36px;
+  }
+
+  .mkt-hero-nav-arrow svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .mkt-dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  .mkt-dot.active {
+    width: 24px;
+  }
+
+  .mkt-cards-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+  }
+
+  .mkt-actors-grid {
+    grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+    gap: 12px;
+  }
+
+  .mkt-news-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .mkt-section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .mkt-section-cta-link {
+    width: 100%;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+
+  /* Tabs mobile dropdown transformation (<= 768px) */
+  .mkt-tabs-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 440px;
+    margin-bottom: 1.5rem;
+    z-index: 25;
+  }
+
+  .mkt-tabs-dropdown-btn {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 11px 16px;
+    background: rgba(20, 20, 30, 0.96);
+    border: 1px solid rgba(229, 9, 20, 0.45);
+    border-radius: 12px;
+    color: #ffffff;
+    font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+    font-size: 0.92rem;
+    font-weight: 700;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    box-sizing: border-box;
+  }
+
+  .mkt-tabs-dropdown-btn:hover,
+  .mkt-tabs-dropdown-btn:focus-visible {
+    border-color: #e50914;
+    background: rgba(26, 26, 38, 0.98);
+    box-shadow: 0 6px 24px rgba(229, 9, 20, 0.3);
+    outline: none;
+  }
+
+  .mkt-dropdown-label-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .mkt-dropdown-icon {
+    color: #e50914;
+    flex-shrink: 0;
+  }
+
+  #mkt-tabs-current-label {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .mkt-dropdown-chevron {
+    color: #a4a4ba;
+    flex-shrink: 0;
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
+  }
+
+  .mkt-tabs-wrapper.open .mkt-dropdown-chevron {
+    transform: rotate(180deg);
+    color: #ffffff;
+  }
+
+  .mkt-tabs-wrapper .mkt-tabs {
+    display: none !important;
+    position: absolute !important;
+    top: calc(100% + 8px) !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    flex-direction: column !important;
+    background: rgba(16, 16, 24, 0.98) !important;
+    border: 1px solid rgba(255, 255, 255, 0.16) !important;
+    border-radius: 14px !important;
+    padding: 6px !important;
+    gap: 4px !important;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 24px rgba(229, 9, 20, 0.18) !important;
+    z-index: 50 !important;
+    backdrop-filter: blur(24px) !important;
+    -webkit-backdrop-filter: blur(24px) !important;
+    box-sizing: border-box !important;
+    animation: mktDropdownFade 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+
+  .mkt-tabs-wrapper.open .mkt-tabs {
+    display: flex !important;
+  }
+
+  .mkt-tabs-wrapper .mkt-tab-btn {
+    width: 100% !important;
+    text-align: left !important;
+    padding: 10px 14px !important;
+    border-radius: 8px !important;
+    font-size: 0.88rem !important;
+    font-weight: 600 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    box-sizing: border-box !important;
+    border: 1px solid transparent !important;
+    color: #b0b0c2 !important;
+  }
+
+  .mkt-tabs-wrapper .mkt-tab-btn.active {
+    background: rgba(229, 9, 20, 0.22) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(229, 9, 20, 0.55) !important;
+    font-weight: 700 !important;
+    box-shadow: none !important;
+  }
+
+  .mkt-tabs-wrapper .mkt-tab-btn:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.08) !important;
+    color: #ffffff !important;
+  }
+
+  .mkt-footer-container {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .mkt-footer-bottom {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mkt-hero {
+    padding: 95px 1rem 30px;
+  }
+
+  .mkt-hero-pill-badge {
+    font-size: 0.72rem;
+    padding: 4px 10px;
+    letter-spacing: 0.03em;
+  }
+
+  .mkt-hero-headline {
+    font-size: clamp(1.75rem, 8vw, 2.15rem);
+    line-height: 1.18;
+  }
+
+  .mkt-hero-meta {
+    font-size: 0.8rem;
+    gap: 6px 8px;
+  }
+
+  .mkt-hero-subheadline {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    max-width: 100%;
+  }
+
+  .mkt-hero-actions {
+    max-width: 100%;
+    gap: 10px;
+  }
+
+  .mkt-btn-primary, .mkt-btn-secondary {
+    padding: 11px 16px;
+    font-size: 0.92rem;
+  }
+
+  .mkt-hero-slider-bar {
+    margin-top: 1.4rem;
+    margin-bottom: 0.25rem;
+    gap: 12px;
+  }
+
+  .mkt-hero-nav-arrow {
+    width: 34px;
+    height: 34px;
+  }
+
+  .mkt-tabs-wrapper {
+    max-width: 100%;
+  }
+
+  .mkt-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .mkt-actors-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .mkt-actor-body {
+    padding: 0.75rem 0.6rem;
+  }
+
+  .mkt-actor-name {
+    font-size: 0.9rem;
+  }
+
+  .mkt-card-body {
+    padding: 0.75rem 0.6rem;
+  }
+
+  .mkt-card-title {
+    font-size: 0.88rem;
+  }
+
+  .mkt-footer-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .mkt-footer-bottom {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}

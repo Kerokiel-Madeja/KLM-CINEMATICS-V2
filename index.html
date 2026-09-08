@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Primary SEO Meta Tags -->
+    <title>KLM Cinematics — Stream Blockbuster Movies, TV Shows, Actors & Live Cinema News</title>
+    <meta name="title" content="KLM Cinematics — Stream Blockbuster Movies, TV Shows, Actors & Live Cinema News" />
+    <meta name="description" content="Discover and stream cinema-grade movies, binge-worthy TV shows, explore verified Hollywood actor profiles, and read real-time entertainment industry news in 4K Ultra HD on KLM Cinematics." />
+    <meta name="keywords" content="KLM Cinematics, movie streaming, watch movies online, TV series, popular actors, entertainment news, GNews, TMDB movies, cinema reviews, franchise watch orders, 4K streaming" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="theme-color" content="#e50914" />
+    <link rel="canonical" href="https://klmcinematics.com/" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://klmcinematics.com/" />
+    <meta property="og:title" content="KLM Cinematics — Stream Movies, TV Shows, Actors & Live Entertainment News" />
+    <meta property="og:description" content="Experience high-fidelity cinema streaming in 4K UHD. Discover trending movies, popular celebrity profiles, and breaking Hollywood news." />
+    <meta property="og:image" content="https://image.tmdb.org/t/p/w1280/4gyx49ibwQslyrwuUS1c58PJEEd.jpg" />
+    <meta property="og:site_name" content="KLM Cinematics" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://klmcinematics.com/" />
+    <meta property="twitter:title" content="KLM Cinematics — Stream Movies, TV Shows, Actors & Live Entertainment News" />
+    <meta property="twitter:description" content="Experience cinema-grade entertainment, trending titles, actor filmographies, and real-time Hollywood news." />
+    <meta property="twitter:image" content="https://image.tmdb.org/t/p/w1280/4gyx49ibwQslyrwuUS1c58PJEEd.jpg" />
+
+    <!-- Performance & Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://image.tmdb.org" />
+    <link rel="preconnect" href="https://api.themoviedb.org" />
+    <link rel="preconnect" href="https://gnews.io" />
+
+    <!-- Core Stylesheets -->
+    <link rel="stylesheet" href="assets/css/global.css" />
+    <link rel="stylesheet" href="assets/css/marketing.css" />
+
+    <!-- Initial Schema.org Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://klmcinematics.com/#website",
+          "url": "https://klmcinematics.com/",
+          "name": "KLM Cinematics",
+          "description": "Cinema-grade movie streaming, TV catalog, actor profiles and real-time entertainment news.",
+          "publisher": {
+            "@type": "Organization",
+            "name": "KLM Cinematics Media Network",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://klmcinematics.com/assets/img/logo.png"
+            }
+          },
+          "potentialAction": [
+            {
+              "@type": "SearchAction",
+              "target": "https://klmcinematics.com/movies.html?q={search_term_string}",
+              "query-input": "required name=search_term_string"
+            }
+          ]
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://klmcinematics.com/#organization",
+          "name": "KLM Cinematics",
+          "url": "https://klmcinematics.com/",
+          "sameAs": [
+            "https://twitter.com/klmcinematics",
+            "https://facebook.com/klmcinematics"
+          ]
+        }
+      ]
+    }
+    </script>
+  </head>
+
+  <body class="marketing-page">
+    <!-- Primary Semantic Navigation Bar -->
+    <header class="navbar-wrapper" role="banner">
+      <nav class="navbar" id="navbar" aria-label="Primary Navigation">
+        <!-- Top Bar Row -->
+        <div class="navbar-top">
+          <!-- Brand Logo -->
+          <a href="#home" class="logo" id="site-logo" aria-label="KLM Cinematics Homepage">
+            <span class="logo-red">KLM</span> CINEMATICS
+          </a>
+
+          <!-- Middle Navigation Links (Home, Trending, Actors, News, About) -->
+          <div class="mid-nav-list" id="mid-nav-list">
+            <a href="#home" class="nav-item active" id="nav-item-home" data-target="home">Home</a>
+            <a href="#trending-section" class="nav-item" id="nav-item-trending" data-target="trending">Trending</a>
+            <a href="#actors-section" class="nav-item" id="nav-item-actors" data-target="actors">Actors</a>
+            <a href="#news-section" class="nav-item" id="nav-item-news" data-target="news">News</a>
+            <a href="#footer-section" class="nav-item" id="nav-item-about" data-target="about">About</a>
+          </div>
+
+          <!-- Right Navigation Area with Featured Conversion CTA -->
+          <div class="right-nav-list" id="right-nav-list" style="display:flex; align-items:center; gap:12px;">
+            <!-- High-Visibility Primary Navbar Conversion Button -->
+            <a href="movies.html" class="nav-cta-btn" id="nav-cta-watch" title="Stream Now">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              <span>Stream Now</span>
+            </a>
+
+            <!-- Hamburger Button for Mobile Drawer -->
+            <button class="hamburger-btn" id="hamburger-btn" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu-collapse">
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Collapsible Mobile Drawer Navigation -->
+        <div class="nav-menu-collapse" id="nav-menu-collapse" aria-hidden="true">
+          <div class="nav-menu-inner">
+            <div class="nav-menu-divider"></div>
+            <ul class="nav-menu-list">
+              <li class="nav-menu-row">
+                <a href="#home" class="nav-menu-item active" data-target="home">
+                  <span class="item-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                  </span>
+                  <span class="item-text">Home</span>
+                </a>
+              </li>
+              <li class="nav-menu-row">
+                <a href="#trending-section" class="nav-menu-item" data-target="trending">
+                  <span class="item-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                  </span>
+                  <span class="item-text">Trending</span>
+                </a>
+              </li>
+              <li class="nav-menu-row">
+                <a href="#actors-section" class="nav-menu-item" data-target="actors">
+                  <span class="item-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="7" r="4"></circle><path d="M5.5 21a6.5 6.5 0 0 1 13 0"></path></svg>
+                  </span>
+                  <span class="item-text">Actors</span>
+                </a>
+              </li>
+              <li class="nav-menu-row">
+                <a href="#news-section" class="nav-menu-item" data-target="news">
+                  <span class="item-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"></path><path d="M18 14h-8"></path><path d="M15 18h-5"></path><path d="M10 6h8v4h-8V6Z"></path></svg>
+                  </span>
+                  <span class="item-text">News &amp; Articles</span>
+                </a>
+              </li>
+              <li class="nav-menu-row">
+                <a href="#footer-section" class="nav-menu-item" data-target="about">
+                  <span class="item-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                  </span>
+                  <span class="item-text">About</span>
+                </a>
+              </li>
+            </ul>
+
+            <!-- Quick Action Footer inside expanded menu -->
+            <div class="nav-menu-footer" style="margin-top: 8px; padding-top: 8px; display: flex; flex-direction: column; gap: 10px; width: 100%;">
+              <a href="#My-List" class="nav-menu-item nav-menu-footer-item my-list-btn" id="footer-my-list-btn" data-target="my-list">
+                <span class="item-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                </span>
+                <span class="item-text">My List</span>
+                <span class="item-count">Saved</span>
+              </a>
+              <a href="movies.html" class="mkt-btn-primary" style="width: 100%; justify-content: center;">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                Stream Now
+              </a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main Semantic Content -->
+    <main id="main-content">
+      <!-- 1. Hero Section (Above the Fold) with TMDB Dynamic Backdrop Slider -->
+      <section class="mkt-hero" id="home" aria-label="Featured Cinema Showcase">
+        <!-- Dynamic Backdrop Container -->
+        <div class="mkt-hero-backdrops" id="hero-backdrops">
+          <!-- Populated by marketing.js with fetchpriority="high" on active slide -->
+          <div class="mkt-hero-slide active" style="background-image: url('https://image.tmdb.org/t/p/w1280/4gyx49ibwQslyrwuUS1c58PJEEd.jpg');"></div>
+        </div>
+
+        <!-- Cinema Scrim Gradients -->
+        <div class="mkt-hero-scrim" aria-hidden="true"></div>
+
+        <!-- Hero Content Grid -->
+        <div class="mkt-hero-container">
+          <!-- Left Column: Copy & High-Visibility Conversion CTA -->
+          <div class="mkt-hero-info">
+            <div class="mkt-hero-pill-badge">
+              <span class="pulse-dot"></span>
+              <span>#1 Trending on KLM Cinematics Today</span>
+            </div>
+
+            <!-- SEO Optimized H1 Title -->
+            <h1 class="mkt-hero-headline" id="hero-headline">
+              Stream Cinema-Grade Blockbusters, <span class="highlight-gradient">Hollywood Stars &amp; Live Industry News</span>
+            </h1>
+
+            <div class="mkt-hero-meta" id="hero-meta">
+              <span class="rating-tag">⭐ 9.4</span>
+              <span class="badge-4k">4K UHD</span>
+              <span class="badge-4k">DOLBY ATMOS</span>
+              <span>•</span>
+              <span>2026 Premiere</span>
+              <span>•</span>
+              <span>Action • Sci-Fi • Thriller</span>
+            </div>
+
+            <p class="mkt-hero-subheadline" id="hero-subheadline">
+              Experience the pinnacle of digital cinema. Stream thousands of blockbuster releases, explore verified actor filmographies, and follow real-time entertainment journalism with zero interruption.
+            </p>
+
+            <!-- Primary Conversion Actions -->
+            <div class="mkt-hero-actions">
+              <a href="movies.html" class="mkt-btn-primary" id="hero-watch-btn" title="Stream on KLM Cinematics">
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                <span>Stream on KLM</span>
+              </a>
+
+              <button type="button" class="mkt-btn-secondary" id="hero-preview-btn" aria-label="Watch trailer preview">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8" fill="currentColor"></polygon></svg>
+                <span>Watch Trailer / Preview</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Right Column: Interactive Live Spotlight Card -->
+          <div class="mkt-hero-spotlight">
+            <article class="mkt-spotlight-card" id="hero-spotlight-card" role="button" tabindex="0" aria-label="Preview currently featured title">
+              <div class="mkt-spotlight-poster" id="hero-spotlight-poster">
+                <div class="mkt-spotlight-play-overlay">
+                  <div class="mkt-spotlight-play-btn" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                  </div>
+                </div>
+              </div>
+              <div class="mkt-spotlight-body">
+                <span class="mkt-spotlight-tag">Featured Spotlight</span>
+                <h2 class="mkt-spotlight-title" id="hero-spotlight-title">Featured Presentation</h2>
+                <p class="mkt-spotlight-desc" id="hero-spotlight-desc">Tap to watch trailer preview or jump directly into cinema streaming.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <!-- Dynamic Slider Navigation Bar (Arrows & Dots) -->
+        <div class="mkt-hero-slider-bar" aria-label="Hero slider navigation">
+          <button type="button" class="mkt-hero-nav-arrow" id="hero-prev-btn" aria-label="Previous trending slide">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          <div class="mkt-slider-dots" id="hero-dots" role="tablist" aria-label="Slide indicators"></div>
+          <button type="button" class="mkt-hero-nav-arrow" id="hero-next-btn" aria-label="Next trending slide">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- 2. Trending Movies, TV Series & Anime Section (TMDB API) -->
+      <section class="mkt-section" id="trending-section" aria-labelledby="trending-title">
+        <div class="mkt-section-header">
+          <div class="mkt-section-title-wrap">
+            <span class="mkt-section-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              Real-Time Global Charts
+            </span>
+            <h2 class="mkt-section-title" id="trending-title">Trending Movies, TV Shows &amp; Anime</h2>
+            <p class="mkt-section-subtitle">Real-time daily chart toppers synced with global audience ratings and multi-genre classifications.</p>
+          </div>
+          <a href="movies.html" class="mkt-section-cta-link" id="trending-view-all">
+            <span>Explore Movies Catalog</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </a>
+        </div>
+
+        <!-- Interactive Tab Switcher & Mobile Dropdown (Movies, TV Series, Anime) -->
+        <div class="mkt-tabs-wrapper" id="mkt-tabs-wrapper">
+          <button type="button" class="mkt-tabs-dropdown-btn" id="mkt-tabs-dropdown-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Select trending content category">
+            <span class="mkt-dropdown-label-wrap">
+              <svg class="mkt-dropdown-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+              <span id="mkt-tabs-current-label">Trending Movies Today</span>
+            </span>
+            <svg class="mkt-dropdown-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="mkt-tabs" id="mkt-tabs-menu" role="tablist" aria-label="Filter trending content">
+            <button type="button" class="mkt-tab-btn active" id="tab-trending-movies" role="tab" aria-selected="true">Trending Movies Today</button>
+            <button type="button" class="mkt-tab-btn" id="tab-trending-tv" role="tab" aria-selected="false">Trending TV Series</button>
+            <button type="button" class="mkt-tab-btn" id="tab-trending-anime" role="tab" aria-selected="false">Trending Anime</button>
+          </div>
+        </div>
+
+        <!-- Dynamic Grid populated by TMDB -->
+        <div class="mkt-cards-grid" id="trending-grid">
+          <!-- Fallback Skeletons while JS loads -->
+          <div class="mkt-media-card" style="min-height:320px;"><div class="mkt-skeleton" style="width:100%;height:100%;"></div></div>
+          <div class="mkt-media-card" style="min-height:320px;"><div class="mkt-skeleton" style="width:100%;height:100%;"></div></div>
+          <div class="mkt-media-card" style="min-height:320px;"><div class="mkt-skeleton" style="width:100%;height:100%;"></div></div>
+          <div class="mkt-media-card" style="min-height:320px;"><div class="mkt-skeleton" style="width:100%;height:100%;"></div></div>
+        </div>
+      </section>
+
+      <!-- 3. Featured Actors & Celebrities Section (TMDB Person API) -->
+      <section class="mkt-section" id="actors-section" aria-labelledby="actors-title">
+        <div class="mkt-section-header">
+          <div class="mkt-section-title-wrap">
+            <span class="mkt-section-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="7" r="4"></circle><path d="M5.5 21a6.5 6.5 0 0 1 13 0"></path></svg>
+              Hollywood Talent &amp; Stars
+            </span>
+            <h2 class="mkt-section-title" id="actors-title">Featured Actors &amp; Celebrities</h2>
+            <p class="mkt-section-subtitle">Discover popular performers, verified acting credits, and iconic film projects currently captivating global cinema.</p>
+          </div>
+        </div>
+
+        <!-- Dynamic Grid populated by TMDB /person/popular -->
+        <div class="mkt-actors-grid" id="actors-grid">
+          <div class="mkt-actor-card" style="min-height:280px;"><div class="mkt-skeleton" style="width:100%;height:100%;"></div></div>
+          <div class="mkt-actor-card" style="min-height:280px;"><div class="mkt-skeleton" style="width:100%;height:100%;"></div></div>
+          <div class="mkt-actor-card" style="min-height:280px;"><div class="mkt-skeleton" style="width:100%;height:100%;"></div></div>
+          <div class="mkt-actor-card" style="min-height:280px;"><div class="mkt-skeleton" style="width:100%;height:100%;"></div></div>
+        </div>
+      </section>
+
+      <!-- 4. Latest Movie News & Updates Section (GNews API Integration) -->
+      <section class="mkt-section" id="news-section" aria-labelledby="news-title">
+        <div class="mkt-section-header">
+          <div class="mkt-section-title-wrap">
+            <span class="mkt-section-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"></path></svg>
+              Live Industry Dispatch
+            </span>
+            <h2 class="mkt-section-title" id="news-title">Latest Movie News &amp; Entertainment Wire</h2>
+            <p class="mkt-section-subtitle">Real-time entertainment reporting powered by GNews API, delivering festival dispatches, casting breakthroughs, and studio reveals.</p>
+          </div>
+        </div>
+
+        <!-- Dynamic News Grid populated by GNews API with Quota Caching -->
+        <div class="mkt-news-grid" id="news-grid">
+          <div class="mkt-news-card" style="min-height:340px;"><div class="mkt-skeleton" style="width:100%;height:100%;"></div></div>
+          <div class="mkt-news-card" style="min-height:340px;"><div class="mkt-skeleton" style="width:100%;height:100%;"></div></div>
+          <div class="mkt-news-card" style="min-height:340px;"><div class="mkt-skeleton" style="width:100%;height:100%;"></div></div>
+        </div>
+      </section>
+
+      <!-- Conversion Driving Banner -->
+      <aside class="mkt-conversion-banner" aria-label="Streaming Conversion Call to Action">
+        <div class="mkt-banner-content">
+          <span class="mkt-hero-pill-badge" style="align-self:center;">
+            <span class="pulse-dot"></span>
+            Unlimited Entertainment
+          </span>
+          <h2 class="mkt-banner-title">Ready for Cinema-Grade Streaming?</h2>
+          <p class="mkt-banner-desc">
+            Dive straight into the KLM Cinematics streaming platform with instant access to 4K Ultra HD blockbusters, series premieres, and anime simulcasts.
+          </p>
+          <a href="movies.html" class="mkt-btn-primary" style="padding:16px 36px;font-size:1.1rem;" title="Enter KLM Cinematics Streaming Platform">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            <span>Watch on KLM Cinematics</span>
+          </a>
+        </div>
+      </aside>
+    </main>
+
+    <!-- Footer & Compliance Navigation -->
+    <footer class="mkt-footer" id="footer-section" role="contentinfo">
+      <div class="mkt-footer-container">
+        <!-- Brand & Description Column -->
+        <div class="mkt-footer-brand-col">
+          <a href="#home" class="mkt-footer-brand">
+            <span class="logo-red">KLM</span> CINEMATICS
+          </a>
+          <p class="mkt-footer-desc">
+            The definitive cinema discovery engine and streaming hub. Delivering 4K Ultra HD entertainment, verified actor insights, and live entertainment journalism directly to your screen.
+          </p>
+          <div style="display:flex;justify-content:center;gap:12px;margin-top:0.5rem;width:100%;">
+            <a href="movies.html" class="nav-cta-btn" style="font-size:0.8rem;padding:6px 14px;">
+              <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              Stream Now
+            </a>
+          </div>
+        </div>
+
+        <!-- Navigation Links Column -->
+        <div class="mkt-footer-col">
+          <h4 class="mkt-footer-heading">Navigation</h4>
+          <ul class="mkt-footer-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="movies.html">Movies Catalog</a></li>
+            <li><a href="tv-shows.html">TV Shows Catalog</a></li>
+            <li><a href="anime.html">Anime &amp; Animation</a></li>
+            <li><a href="#actors-section">Popular Actors</a></li>
+            <li><a href="#news-section">Entertainment News</a></li>
+          </ul>
+        </div>
+
+        <!-- Compliance & Legal Column -->
+        <div class="mkt-footer-col">
+          <h4 class="mkt-footer-heading">Legal &amp; Compliance</h4>
+          <ul class="mkt-footer-links">
+            <li><a href="#" data-legal-modal="dmca">DMCA Disclaimer</a></li>
+            <li><a href="#" data-legal-modal="privacy">Privacy Policy</a></li>
+            <li><a href="#" data-legal-modal="terms">Terms of Service</a></li>
+            <li><a href="#" data-legal-modal="contact">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Footer Bottom Compliance Bar -->
+      <div class="mkt-footer-bottom">
+        <p>&copy; 2026 KLM CINEMATICS. All rights reserved. Designed for high-fidelity streaming.</p>
+        <div class="mkt-footer-badges">
+          <span class="mkt-attribution-pill">Powered by TMDB API</span>
+          <span class="mkt-attribution-pill">News via GNews API</span>
+          <span class="mkt-attribution-pill">4K Ultra HD</span>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Interactive Trailer / Preview Modal -->
+    <div class="mkt-modal-backdrop" id="trailer-modal" role="dialog" aria-modal="true" aria-labelledby="trailer-title" aria-hidden="true">
+      <div class="mkt-modal-dialog">
+        <button type="button" class="mkt-modal-close-btn" id="trailer-close-btn" aria-label="Close preview modal">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+        <div class="mkt-video-wrapper" id="trailer-video-wrap"></div>
+        <div class="mkt-modal-info">
+          <h3 class="mkt-modal-title" id="trailer-title">Trailer Preview</h3>
+          <p class="mkt-modal-text" id="trailer-text">Enjoy the cinematic preview.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Compliance / Legal Modal Dialog -->
+    <div class="mkt-modal-backdrop" id="legal-modal" role="dialog" aria-modal="true" aria-labelledby="legal-modal-title" aria-hidden="true">
+      <div class="mkt-modal-dialog" style="padding:2rem;">
+        <button type="button" class="mkt-modal-close-btn" id="legal-close-btn" aria-label="Close dialog">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+        <h2 class="mkt-modal-title" id="legal-modal-title" style="margin-bottom:1rem;">Policy Notice</h2>
+        <div class="mkt-modal-text" id="legal-modal-body"></div>
+      </div>
+    </div>
+
+    <!-- Modular Scripts -->
+    <script src="assets/js/navbar.js"></script>
+    <script src="assets/js/watchlist.js"></script>
+    <script src="assets/js/marketing.js"></script>
+  </body>
+</html>

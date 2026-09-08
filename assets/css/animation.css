@@ -1,0 +1,113 @@
+/* ==========================================================
+   KLM CINEMATICS - Micro-Animations & Transitions
+   ========================================================== */
+
+/* ==========================================================
+   Hamburger to Close "X" Morphing Animation
+   ========================================================== */
+.hamburger-btn .bar {
+  transition:
+    transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.25s ease,
+    background-color 0.25s ease;
+}
+
+/* Top bar: translates down 7px and rotates 45deg */
+.navbar.menu-open .hamburger-btn .bar:nth-child(1),
+.hamburger-btn.open .bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+  background-color: var(--red);
+}
+
+/* Middle bar: vanishes with scale */
+.navbar.menu-open .hamburger-btn .bar:nth-child(2),
+.hamburger-btn.open .bar:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+/* Bottom bar: translates up 7px and rotates -45deg */
+.navbar.menu-open .hamburger-btn .bar:nth-child(3),
+.hamburger-btn.open .bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+  background-color: var(--red);
+}
+
+/* ==========================================================
+   Staggered Fade & Slide In for Nav Menu Items
+   ========================================================== */
+.nav-menu-collapse .nav-menu-row {
+  opacity: 0;
+  transform: translateY(-8px);
+  transition:
+    opacity 0.28s var(--ease-spring),
+    transform 0.28s var(--ease-spring);
+}
+
+/* Stagger when menu is opened */
+.navbar.menu-open .nav-menu-collapse .nav-menu-row {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.navbar.menu-open .nav-menu-collapse .nav-menu-row:nth-child(1) {
+  transition-delay: 0.04s;
+}
+
+.navbar.menu-open .nav-menu-collapse .nav-menu-row:nth-child(2) {
+  transition-delay: 0.08s;
+}
+
+.navbar.menu-open .nav-menu-collapse .nav-menu-row:nth-child(3) {
+  transition-delay: 0.12s;
+}
+
+.navbar.menu-open .nav-menu-collapse .nav-menu-row:nth-child(4) {
+  transition-delay: 0.16s;
+}
+
+.navbar.menu-open .nav-menu-collapse .nav-menu-row:nth-child(5) {
+  transition-delay: 0.2s;
+}
+
+.navbar.menu-open .nav-menu-collapse .nav-menu-row:nth-child(6) {
+  transition-delay: 0.24s;
+}
+
+
+.navbar.menu-open .nav-menu-footer {
+  opacity: 0;
+  animation: fadeInFooter 0.3s ease 0.3s forwards;
+}
+
+@keyframes fadeInFooter {
+  to {
+    opacity: 1;
+  }
+}
+
+/* ==========================================================
+   Keyframes & Micro-Animations
+   ========================================================== */
+@keyframes pulseRed {
+  0% {
+    box-shadow: 0 0 0 0 rgba(229, 9, 20, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(229, 9, 20, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(229, 9, 20, 0);
+  }
+}
+
+.pulse-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--red);
+  margin-right: 6px;
+  animation: pulseRed 2s infinite;
+}
+
