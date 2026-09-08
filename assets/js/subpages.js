@@ -1638,8 +1638,7 @@
   // Video Player Modal (Server Selection & Episode Engine)
   // TMDB-only Architecture — no AniList or Jikan dependencies
   // ==========================================================
-  const TMDB_API_KEY          = "57a0bf48cdfb41f42652162db1f0617e";
-  const TMDB_BASE_URL         = "https://api.themoviedb.org/3";
+  const TMDB_PROXY            = "/api/tmdb";
   const TMDB_BACKDROP_LG      = "https://image.tmdb.org/t/p/w1280";
   const TMDB_BACKDROP_MD      = "https://image.tmdb.org/t/p/w780";
   const TMDB_POSTER_MD        = "https://image.tmdb.org/t/p/w500";
@@ -1669,7 +1668,7 @@
   }
 
   async function searchTMDB(type, query, year) {
-    let url = `${TMDB_BASE_URL}/search/${type}?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(query)}&include_adult=false`;
+    let url = `${TMDB_PROXY}?path=search/${type}&query=${encodeURIComponent(query)}&include_adult=false`;
     if (year) url += `&year=${year}`;
     try {
       const controller = new AbortController();
@@ -2468,7 +2467,7 @@
       try {
         const controller = new AbortController();
         const timer = setTimeout(() => controller.abort(), 2500);
-        const res = await fetch(`${TMDB_BASE_URL}/tv/${seriesId}?api_key=${TMDB_API_KEY}`, { signal: controller.signal });
+        const res = await fetch(`${TMDB_PROXY}?path=tv/${seriesId}`, { signal: controller.signal });
         clearTimeout(timer);
         if (res.ok) {
           const data = await res.json();
@@ -2523,7 +2522,7 @@
       try {
         const controller = new AbortController();
         const timer = setTimeout(() => controller.abort(), 2500);
-        const res = await fetch(`${TMDB_BASE_URL}/tv/${seriesId}/season/${seasonNum}?api_key=${TMDB_API_KEY}`, { signal: controller.signal });
+        const res = await fetch(`${TMDB_PROXY}?path=tv/${seriesId}/season/${seasonNum}`, { signal: controller.signal });
         clearTimeout(timer);
         if (res.ok) {
           const data = await res.json();
@@ -3695,13 +3694,13 @@
     const genreId = (GENRE_TMDB_MAP[catKey] && GENRE_TMDB_MAP[catKey][rawGenre]) || rawGenre;
     let endpoint = "";
     if (catKey === "movies") {
-      endpoint = `${TMDB_BASE_URL}/discover/movie?api_key=${TMDB_API_KEY}&with_genres=${genreId}&sort_by=popularity.desc&page=1`;
+      endpoint = `${TMDB_PROXY}?path=discover/movie&with_genres=${genreId}&sort_by=popularity.desc&page=1`;
     } else if (catKey === "tv-shows") {
-      endpoint = `${TMDB_BASE_URL}/discover/tv?api_key=${TMDB_API_KEY}&with_genres=${genreId}&sort_by=popularity.desc&page=1`;
+      endpoint = `${TMDB_PROXY}?path=discover/tv&with_genres=${genreId}&sort_by=popularity.desc&page=1`;
     } else if (catKey === "anime") {
       endpoint = `${TMDB_BASE_URL}/discover/tv?api_key=${TMDB_API_KEY}&with_genres=${genreId}&with_original_language=ja&sort_by=popularity.desc&page=1`;
     } else {
-      endpoint = `${TMDB_BASE_URL}/discover/movie?api_key=${TMDB_API_KEY}&with_genres=${genreId}&sort_by=popularity.desc&page=1`;
+      endpoint = `${TMDB_PROXY}?path=discover/movie&with_genres=${genreId}&sort_by=popularity.desc&page=1`;
     }
 
     try {
@@ -3842,44 +3841,43 @@
 
   // Endpoints for daily hero slider and all rails per category
   function getSubpageAllEndpoints(catKey) {
-    const base = TMDB_BASE_URL;
-    const key = TMDB_API_KEY;
+    const proxy = TMDB_PROXY;
 
     switch (catKey) {
       case "movies":
         return {
-          daily: `${base}/trending/movie/day?api_key=${key}`,
+          daily: `${proxy}?path=trending/movie/day`,
           rails: [
-            `${base}/trending/movie/week?api_key=${key}`,
-            `${base}/movie/top_rated?api_key=${key}&page=1`,
-            `${base}/discover/movie?api_key=${key}&with_genres=28,53&sort_by=popularity.desc&page=1`,
-            `${base}/discover/movie?api_key=${key}&with_genres=878,12&sort_by=popularity.desc&page=1`,
-            `${base}/discover/movie?api_key=${key}&with_genres=80,9648&sort_by=popularity.desc&page=1`,
-            `${base}/movie/popular?api_key=${key}&page=2`
+            `${proxy}?path=trending/movie/week`,
+            `${proxy}?path=movie/top_rated&page=1`,
+            `${proxy}?path=discover/movie&with_genres=28,53&sort_by=popularity.desc&page=1`,
+            `${proxy}?path=discover/movie&with_genres=878,12&sort_by=popularity.desc&page=1`,
+            `${proxy}?path=discover/movie&with_genres=80,9648&sort_by=popularity.desc&page=1`,
+            `${proxy}?path=movie/popular&page=2`
           ]
         };
       case "tv-shows":
         return {
-          daily: `${base}/trending/tv/day?api_key=${key}`,
+          daily: `${proxy}?path=trending/tv/day`,
           rails: [
-            `${base}/trending/tv/week?api_key=${key}`,
-            `${base}/tv/top_rated?api_key=${key}&page=1`,
-            `${base}/discover/tv?api_key=${key}&with_genres=10765&sort_by=popularity.desc&page=1`,
-            `${base}/discover/tv?api_key=${key}&with_genres=80,18&sort_by=popularity.desc&page=1`,
-            `${base}/discover/tv?api_key=${key}&with_genres=9648&sort_by=popularity.desc&page=1`,
-            `${base}/tv/popular?api_key=${key}&page=2`
+            `${proxy}?path=trending/tv/week`,
+            `${proxy}?path=tv/top_rated&page=1`,
+            `${proxy}?path=discover/tv&with_genres=10765&sort_by=popularity.desc&page=1`,
+            `${proxy}?path=discover/tv&with_genres=80,18&sort_by=popularity.desc&page=1`,
+            `${proxy}?path=discover/tv&with_genres=9648&sort_by=popularity.desc&page=1`,
+            `${proxy}?path=tv/popular&page=2`
           ]
         };
       case "anime":
         return {
-          daily: `${base}/discover/tv?api_key=${key}&with_genres=16&with_original_language=ja&sort_by=popularity.desc&page=1`,
+          daily: `${proxy}?path=discover/tv&with_genres=16&with_original_language=ja&sort_by=popularity.desc&page=1`,
           rails: [
-            `${base}/discover/tv?api_key=${key}&with_genres=16&with_original_language=ja&sort_by=popularity.desc&page=1`,
-            `${base}/discover/tv?api_key=${key}&with_genres=16,10759&with_original_language=ja&sort_by=popularity.desc&page=1`,
-            `${base}/discover/tv?api_key=${key}&with_genres=16,10765&with_original_language=ja&sort_by=popularity.desc&page=1`,
-            `${base}/discover/tv?api_key=${key}&with_genres=16&with_original_language=ja&sort_by=vote_average.desc&vote_count.gte=200&page=1`,
-            `${base}/discover/tv?api_key=${key}&with_genres=16&with_original_language=ja&sort_by=popularity.desc&page=2`,
-            `${base}/discover/tv?api_key=${key}&with_genres=16&with_original_language=ja&sort_by=vote_count.desc&page=1`
+            `${proxy}?path=discover/tv&with_genres=16&with_original_language=ja&sort_by=popularity.desc&page=1`,
+            `${proxy}?path=discover/tv&with_genres=16,10759&with_original_language=ja&sort_by=popularity.desc&page=1`,
+            `${proxy}?path=discover/tv&with_genres=16,10765&with_original_language=ja&sort_by=popularity.desc&page=1`,
+            `${proxy}?path=discover/tv&with_genres=16&with_original_language=ja&sort_by=vote_average.desc&vote_count.gte=200&page=1`,
+            `${proxy}?path=discover/tv&with_genres=16&with_original_language=ja&sort_by=popularity.desc&page=2`,
+            `${proxy}?path=discover/tv&with_genres=16&with_original_language=ja&sort_by=vote_count.desc&page=1`
           ]
         };
 

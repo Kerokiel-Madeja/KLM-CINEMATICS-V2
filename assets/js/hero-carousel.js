@@ -8,8 +8,7 @@
   "use strict";
 
   /* ── Constants ─────────────────────────────────────────── */
-  const TMDB_API_KEY   = "57a0bf48cdfb41f42652162db1f0617e";
-  const TMDB_ENDPOINT  = `https://api.themoviedb.org/3/trending/all/day?api_key=${TMDB_API_KEY}`;
+  const TMDB_ENDPOINT  = "/api/tmdb?path=trending/all/day";
   const TMDB_IMG_BASE  = "https://image.tmdb.org/t/p/w1280";
   const SLIDE_INTERVAL = 4000; // ms
   const MAX_SLIDES     = 5;

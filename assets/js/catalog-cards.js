@@ -9,18 +9,17 @@
   "use strict";
 
   /* ── Config ────────────────────────────────────────────── */
-  const API_KEY       = "57a0bf48cdfb41f42652162db1f0617e";
   const BACKDROP_BASE = "https://image.tmdb.org/t/p/w780";
   const POSTER_BASE   = "https://image.tmdb.org/t/p/w500";
-  const TMDB          = "https://api.themoviedb.org/3";
+  const TMDB_PROXY    = "/api/tmdb";
   const CARDS_COUNT   = 4;   // cards per section
 
   /* ── TMDB Endpoints ────────────────────────────────────── */
   const ENDPOINTS = {
-    movies: `${TMDB}/trending/movie/week?api_key=${API_KEY}`,
-    tvshows: `${TMDB}/trending/tv/week?api_key=${API_KEY}`,
+    movies: `${TMDB_PROXY}?path=trending/movie/week`,
+    tvshows: `${TMDB_PROXY}?path=trending/tv/week`,
     // Authentic Japanese trending anime (TMDB weekly trending animation)
-    anime: `${TMDB}/trending/tv/week?api_key=${API_KEY}`,
+    anime: `${TMDB_PROXY}?path=trending/tv/week`,
   };
 
   /* ── Grid targets (matching IDs in HTML) ─────────────────── */
@@ -228,7 +227,7 @@
       // If fewer than CARDS_COUNT (4) are found in trending TV, supplement with top discover anime
       if (animeList.length < CARDS_COUNT) {
         const discoverData = await fetchJSON(
-          `${TMDB}/discover/tv?api_key=${API_KEY}&with_genres=16&with_original_language=ja&sort_by=popularity.desc&page=1`
+          `${TMDB_PROXY}?path=discover/tv&with_genres=16&with_original_language=ja&sort_by=popularity.desc&page=1`
         ).catch(() => ({ results: [] }));
         for (const item of (discoverData.results || [])) {
           if (!seenIds.has(item.id)) {
@@ -244,7 +243,7 @@
       console.warn("[CatalogCards] fetchTrendingAnime failed:", err);
       // Fallback directly to discover anime
       return fetchJSON(
-        `${TMDB}/discover/tv?api_key=${API_KEY}&with_genres=16&with_original_language=ja&sort_by=popularity.desc&page=1`
+        `${TMDB_PROXY}?path=discover/tv&with_genres=16&with_original_language=ja&sort_by=popularity.desc&page=1`
       );
     }
   }

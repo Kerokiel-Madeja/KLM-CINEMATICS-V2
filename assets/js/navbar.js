@@ -292,8 +292,7 @@ function initNavbar() {
   ];
 
   // TMDB Search & Filter Engine
-  const TMDB_API_KEY = "57a0bf48cdfb41f42652162db1f0617e";
-  const TMDB_BASE_URL = "https://api.themoviedb.org/3";
+  const TMDB_PROXY = "/api/tmdb";
   const TMDB_GENRES = {
     28: "Action", 12: "Adventure", 16: "Animation", 35: "Comedy",
     80: "Crime", 99: "Documentary", 18: "Drama", 10751: "Family",
@@ -435,7 +434,7 @@ function initNavbar() {
         return trendingResultsCache;
       }
       try {
-        const res = await fetch(`${TMDB_BASE_URL}/trending/all/day?api_key=${TMDB_API_KEY}`);
+        const res = await fetch(`${TMDB_PROXY}?path=trending/all/day`);
         if (res.ok) {
           const data = await res.json();
           if (data && Array.isArray(data.results)) {
@@ -465,7 +464,7 @@ function initNavbar() {
     activeSearchController = new AbortController();
 
     try {
-      const url = `${TMDB_BASE_URL}/search/multi?api_key=${TMDB_API_KEY}&language=en-US&query=${encodeURIComponent(trimmed)}&page=1&include_adult=false`;
+      const url = `${TMDB_PROXY}?path=search/multi&language=en-US&query=${encodeURIComponent(trimmed)}&page=1&include_adult=false`;
       const res = await fetch(url, { signal: activeSearchController.signal });
       if (res.ok) {
         const data = await res.json();
