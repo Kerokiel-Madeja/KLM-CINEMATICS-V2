@@ -111,3 +111,69 @@
   animation: pulseRed 2s infinite;
 }
 
+
+
+/* ==========================================================
+   Cinematic Page Preloader (Fullscreen Loading Overlay)
+   ========================================================== */
+.page-loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #08080c;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, visibility;
+}
+
+.page-loader-overlay.fade-out {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+.page-loader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  user-select: none;
+}
+
+.page-loader-spinner {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 3px solid rgba(229, 9, 20, 0.15);
+  border-top-color: #e50914;
+  box-shadow: 0 0 20px rgba(229, 9, 20, 0.35), inset 0 0 10px rgba(229, 9, 20, 0.1);
+  animation: loaderSpin 0.75s cubic-bezier(0.5, 0.1, 0.5, 0.9) infinite;
+}
+
+.page-loader-text {
+  font-family: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin-top: 4px;
+}
+
+.page-loader-text .brand-red {
+  color: #e50914;
+  text-shadow: 0 0 16px rgba(229, 9, 20, 0.75);
+}
+
+@keyframes loaderSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

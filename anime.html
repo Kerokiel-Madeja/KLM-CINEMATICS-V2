@@ -6,8 +6,49 @@
     <meta name="description" content="KLM CINEMATICS - Stream the latest Anime simulcasts, animated films & visual masterpieces in 4K Ultra HD." />
     <link rel="stylesheet" href="assets/css/global.css" />
     <title>Anime & Animation — KLM CINEMATICS</title>
+      <style>
+      #page-loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: #08080c;
+        z-index: 999999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
   </head>
   <body class="subpage-active">
+    <!-- Cinematic Page Preloader Overlay -->
+    <div id="page-loader" class="page-loader-overlay" aria-label="Loading KLM Cinematics">
+      <div class="page-loader-content">
+        <div class="page-loader-spinner" role="status" aria-label="Loading"></div>
+        <div class="page-loader-text"><span class="brand-red">KLM</span> CINEMATICS</div>
+      </div>
+    </div>
+    <script>
+      (function(){
+        var l = document.getElementById("page-loader");
+        if(!l) return;
+        var h = false;
+        function hide(){
+          if(h) return;
+          h = true;
+          l.classList.add("fade-out");
+          setTimeout(function(){ if(l.parentNode) l.style.display = "none"; }, 500);
+        }
+        if(document.readyState === "complete") {
+          setTimeout(hide, 200);
+        } else {
+          window.addEventListener("load", function(){ setTimeout(hide, 150); });
+        }
+        setTimeout(hide, 2500);
+      })();
+    </script>
+
     <!-- Top Navigation Container -->
     <header class="navbar-wrapper">
       <nav class="navbar" id="navbar" aria-label="Primary Navigation">
