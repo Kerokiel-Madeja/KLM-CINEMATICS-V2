@@ -11,9 +11,8 @@
      1. CONFIGURATION & CREDENTIALS
      =================================================================== */
   const CONFIG = {
-    tmdbKey: "57a0bf48cdfb41f42652162db1f0617e",
-    gnewsKey: "ffdef2a70a18c4de3139f471fcfee54d",
-    tmdbBase: "https://api.themoviedb.org/3",
+    tmdbProxy: "/api/tmdb",
+    newsProxy: "/api/news",
     backdropBase: "https://image.tmdb.org/t/p/w1280",
     posterBase: "https://image.tmdb.org/t/p/w500",
     profileBase: "https://image.tmdb.org/t/p/w300",
@@ -103,7 +102,7 @@
       if (cached) return cached;
 
       try {
-        const res = await fetch(`${CONFIG.tmdbBase}/trending/movie/day?api_key=${CONFIG.tmdbKey}`);
+        const res = await fetch(`${CONFIG.tmdbProxy}?path=trending/movie/day`);
         if (!res.ok) throw new Error(`TMDB movies status ${res.status}`);
         const data = await res.json();
         const results = data.results || [];
@@ -121,7 +120,7 @@
       if (cached) return cached;
 
       try {
-        const res = await fetch(`${CONFIG.tmdbBase}/trending/tv/day?api_key=${CONFIG.tmdbKey}`);
+        const res = await fetch(`${CONFIG.tmdbProxy}?path=trending/tv/day`);
         if (!res.ok) throw new Error(`TMDB TV status ${res.status}`);
         const data = await res.json();
         const results = data.results || [];
@@ -139,7 +138,7 @@
       if (cached) return cached;
 
       try {
-        const res = await fetch(`${CONFIG.tmdbBase}/discover/tv?api_key=${CONFIG.tmdbKey}&with_genres=16&sort_by=popularity.desc`);
+        const res = await fetch(`${CONFIG.tmdbProxy}?path=discover/tv&with_genres=16&sort_by=popularity.desc`);
         if (!res.ok) throw new Error(`TMDB Anime status ${res.status}`);
         const data = await res.json();
         const results = data.results || [];
@@ -157,7 +156,7 @@
       if (cached) return cached;
 
       try {
-        const res = await fetch(`${CONFIG.tmdbBase}/person/popular?api_key=${CONFIG.tmdbKey}`);
+        const res = await fetch(`${CONFIG.tmdbProxy}?path=person/popular`);
         if (!res.ok) throw new Error(`TMDB Person status ${res.status}`);
         const data = await res.json();
         const results = data.results || [];
@@ -171,7 +170,7 @@
 
     async fetchMovieTrailerKey(movieId) {
       try {
-        const res = await fetch(`${CONFIG.tmdbBase}/movie/${movieId}/videos?api_key=${CONFIG.tmdbKey}`);
+        const res = await fetch(`${CONFIG.tmdbProxy}?path=movie/${movieId}/videos`);
         if (!res.ok) return null;
         const data = await res.json();
         const videos = data.results || [];
@@ -196,7 +195,7 @@
       }
 
       try {
-        const endpoint = `https://gnews.io/api/v4/search?q=movies+OR+cinema&lang=en&token=${CONFIG.gnewsKey}`;
+        const endpoint = `${CONFIG.newsProxy}?category=entertainment&q=movies`;
         const res = await fetch(endpoint);
         if (res.status === 429) {
           console.warn("GNews quota exceeded (429 Too Many Requests), activating graceful cached fallback.");
