@@ -1,0 +1,8 @@
+﻿node_modules
+scratch
+.git
+.github
+.dev.vars
+package.json
+package-lock.json
+build.js
