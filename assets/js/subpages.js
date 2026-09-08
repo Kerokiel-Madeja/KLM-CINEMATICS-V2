@@ -4339,7 +4339,14 @@
     const hash = window.location.hash.toLowerCase().replace("#", "");
     const cleanRoute = hash.replace("/", "").replace("all-", "").replace("shows", "tv-shows");
     const path = window.location.pathname.toLowerCase();
-    const isStandaloneSubpage = path.includes("movies.html") || path.includes("tv-shows.html") || path.includes("anime.html") || path.includes("cartoons.html") || document.body.classList.contains("subpage-active");
+    const isStandaloneSubpage = !document.body.classList.contains("marketing-page") && (
+      path.includes("movies") ||
+      path.includes("tv-shows") ||
+      path.includes("anime") ||
+      path.includes("cartoon") ||
+      path.includes("stream") ||
+      document.body.classList.contains("subpage-active")
+    );
 
     if (cleanRoute === "movies" || cleanRoute === "movie") {
       navigateToCategory("movies", false);
@@ -4431,10 +4438,13 @@
             updateNavbarActive(resolvedCat);
           }
         } else if (targetToken === "home" || rawHref.includes("home") || (rawHref.includes("index") && !rawHref.includes("list"))) {
-          const isStandaloneSubpage = window.location.pathname.includes("anime.html") ||
-                                      window.location.pathname.includes("movies.html") ||
-                                      window.location.pathname.includes("tv-shows.html") ||
-                                      window.location.pathname.includes("cartoons.html");
+          const isStandaloneSubpage = !document.body.classList.contains("marketing-page") ||
+                                      window.location.pathname.includes("anime") ||
+                                      window.location.pathname.includes("movies") ||
+                                      window.location.pathname.includes("tv-shows") ||
+                                      window.location.pathname.includes("cartoon") ||
+                                      window.location.pathname.includes("stream") ||
+                                      document.body.classList.contains("subpage-active");
           if (isStandaloneSubpage) {
             e.preventDefault();
             sessionStorage.setItem("klm_scroll_to_hero", "true");

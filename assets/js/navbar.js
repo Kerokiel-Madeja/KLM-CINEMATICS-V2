@@ -835,23 +835,13 @@ function initNavbar() {
   // Context-Aware Navigation Architecture (Home vs Subpages)
   // ==========================================================
   function getCurrentPageContext() {
+    if (document.body.classList.contains("marketing-page")) return "home";
     const path = (window.location.pathname || "").toLowerCase();
-    if (path.includes("movies.html") || path.endsWith("/movies")) return "movies";
-    if (path.includes("tv-shows.html") || path.includes("tvshows") || path.endsWith("/tv-shows")) return "tv-shows";
-    if (path.includes("anime.html") || path.endsWith("/anime") || path.includes("cartoons.html") || path.endsWith("/cartoons")) return "anime";
-
-    // Dynamic SPA subpage check on index.html
-    const hash = (window.location.hash || "").toLowerCase().replace("#", "").replace("/", "");
-    if (hash.includes("movie")) return "movies";
-    if (hash.includes("tv") || hash.includes("show")) return "tv-shows";
-    if (hash.includes("anime") || hash.includes("cartoon")) return "anime";
-
-    const subpageContainer = document.getElementById("subpage-view");
-    if (subpageContainer && subpageContainer.style.display !== "none") {
-      const activeCat = window.KLMCinematicsSubpages?.activeCategory;
-      if (activeCat) return (activeCat === "cartoons" ? "anime" : activeCat);
-    }
-
+    if (path.includes("movie")) return "movies";
+    if (path.includes("tv") || path.includes("show")) return "tv-shows";
+    if (path.includes("anime") || path.includes("cartoon")) return "anime";
+    if (path.includes("stream")) return "stream";
+    if (path === "" || path === "/" || path.endsWith("/index.html") || path.endsWith("/index")) return "home";
     return "home";
   }
 
@@ -1008,9 +998,10 @@ function initNavbar() {
   }
 
   // Ensure navigation to hero section on home page
-  const isHomePage = window.location.pathname.endsWith("index.html") ||
-                     window.location.pathname.endsWith("/") ||
-                     !window.location.pathname.includes(".html");
+  const isHomePage = document.body.classList.contains("marketing-page") ||
+                     window.location.pathname === "/" ||
+                     window.location.pathname.endsWith("/index.html") ||
+                     window.location.pathname.endsWith("/index");
 
   if (isHomePage) {
     const hash = (window.location.hash || "").toLowerCase();
@@ -1136,9 +1127,10 @@ function initNavbar() {
         e.preventDefault();
         setMenuOpen(false);
 
-        const isHome = window.location.pathname.endsWith("index.html") ||
-                       window.location.pathname.endsWith("/") ||
-                       !window.location.pathname.includes(".html");
+        const isHome = document.body.classList.contains("marketing-page") ||
+                     window.location.pathname === "/" ||
+                     window.location.pathname.endsWith("/index.html") ||
+                     window.location.pathname.endsWith("/index");
 
         if (isHome) {
           // If a subpage view is open on index.html, close it and restore home
@@ -1227,9 +1219,16 @@ function initNavbar() {
         if (destination) {
           e.preventDefault();
           setMenuOpen(false);
-          // If destination is the current page, scroll to top
-          const currentFile = window.location.pathname.split("/").pop() || "index.html";
-          if (destination.startsWith(currentFile)) {
+          if (key === "home") {
+            window.location.href = "index.html#home";
+            return;
+          }
+          const path = (window.location.pathname || "").toLowerCase();
+          if (
+            (key === "movies" && path.includes("movie")) ||
+            (key === "tv-shows" && (path.includes("tv-shows") || path.includes("tvshows"))) ||
+            (key === "anime" && (path.includes("anime") || path.includes("cartoon")))
+          ) {
             window.scrollTo({ top: 0, behavior: "smooth" });
           } else {
             window.location.href = destination;
@@ -1246,9 +1245,10 @@ function initNavbar() {
       e.preventDefault();
       setMenuOpen(false);
 
-      const isHome = window.location.pathname.endsWith("index.html") ||
-                     window.location.pathname.endsWith("/") ||
-                     !window.location.pathname.includes(".html");
+      const isHome = document.body.classList.contains("marketing-page") ||
+                     window.location.pathname === "/" ||
+                     window.location.pathname.endsWith("/index.html") ||
+                     window.location.pathname.endsWith("/index");
 
       if (isHome) {
         const subpageContainer = document.getElementById("subpage-view");
