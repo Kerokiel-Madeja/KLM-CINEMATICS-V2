@@ -236,9 +236,11 @@
       ? `style="background-image: url('${imgUrl}'); background-size: cover; background-position: center center;"`
       : "";
     const safeOverview = (item.overview || "").replace(/"/g, "&quot;");
+    const isMovie = item.isMovie !== undefined ? Boolean(item.isMovie) : (item.mediaType === "movie" || item.category === "movies");
+    const mediaType = item.mediaType || (item.category === "anime" ? "anime" : (isMovie ? "movie" : "tv"));
 
     return `
-      <article class="cinema-card" tabindex="0" role="button" aria-label="Play ${item.title}" data-tmdb-id="${item.tmdbId || ""}" data-title="${item.title}" data-genres="${item.genres || ""}" data-year="${item.year || "2026"}" data-is-movie="${item.isMovie ? "true" : "false"}" data-media-type="${item.mediaType || "movie"}" data-overview="${safeOverview}">
+      <article class="cinema-card" tabindex="0" role="button" aria-label="Play ${item.title}" data-tmdb-id="${item.tmdbId || item.id || ""}" data-title="${item.title}" data-genres="${item.genres || ""}" data-year="${item.year || "2026"}" data-is-movie="${isMovie ? "true" : "false"}" data-media-type="${mediaType}" data-overview="${safeOverview}">
         <div class="card-poster ${item.posterClass || "poster-1"}" ${bgStyle}>
           <span class="card-badge">SAVED</span>
           <div class="card-poster-top-actions">
@@ -554,22 +556,36 @@
         const id = card.getAttribute("data-tmdb-id");
         const found = findWatchlistItem(id || title);
 
-        const playItem = found || {
-          tmdbId: id ? Number(id) : null,
-          title: title,
-          category: card.getAttribute("data-media-type") === "anime" ? "anime" : "movies",
-          mediaType: card.getAttribute("data-media-type") || "movie",
-          isMovie: card.getAttribute("data-is-movie") === "true",
-          rating: card.querySelector(".card-rating")?.textContent.replace("⭐", "").trim() || "8.5",
-          year: card.getAttribute("data-year") || "2026",
-          duration: "2h 05m",
-          genres: card.querySelector(".card-genre")?.textContent.trim() || "",
-          description: card.getAttribute("data-overview") || "Streaming on KLM CINEMATICS.",
-          overview: card.getAttribute("data-overview") || "Streaming on KLM CINEMATICS."
-        };
+        const cardIsMovie = card.getAttribute("data-is-movie") === "true";
+        const cardMediaType = card.getAttribute("data-media-type") || (cardIsMovie ? "movie" : "tv");
+
+        const playItem = Object.assign({}, found || {}, {
+          id: id ? Number(id) : (found?.id || null),
+          tmdbId: id ? Number(id) : (found?.tmdbId || null),
+          title: title || found?.title,
+          category: found?.category || (cardMediaType === "anime" ? "anime" : (cardIsMovie ? "movies" : "tv-shows")),
+          mediaType: found?.mediaType || cardMediaType,
+          isMovie: found?.isMovie !== undefined ? found.isMovie : cardIsMovie,
+          rating: found?.rating || card.querySelector(".card-rating")?.textContent.replace("⭐", "").trim() || "8.5",
+          year: found?.year || card.getAttribute("data-year") || "2026",
+          duration: found?.duration || (cardIsMovie ? "2h 05m" : "Season 1"),
+          genres: found?.genres || card.querySelector(".card-genre")?.textContent.trim() || "",
+          description: found?.overview || card.getAttribute("data-overview") || "Streaming on KLM CINEMATICS.",
+          overview: found?.overview || card.getAttribute("data-overview") || "Streaming on KLM CINEMATICS.",
+          backdropUrl: found?.backdropUrl || found?.posterUrl || ""
+        });
+
+        // Close the watchlist modal immediately so it doesn't block the screen or player
+        closeWatchlistModal();
 
         if (window.KLMCinematicsSubpages && typeof window.KLMCinematicsSubpages.openPlayerModal === "function") {
           window.KLMCinematicsSubpages.openPlayerModal(playItem);
+        } else {
+          // If on marketing homepage where subpages.js is not loaded, redirect to corresponding subpage player URL
+          const mediaType = playItem.mediaType || (playItem.category === "anime" ? "anime" : (playItem.isMovie ? "movie" : "tv"));
+          const targetRoute = mediaType === "anime" ? "anime.html" : (mediaType === "tv" ? "tv-shows.html" : "movies.html");
+          const playId = playItem.tmdbId || playItem.id || "";
+          window.location.href = `${targetRoute}?play=${playId}&title=${encodeURIComponent(playItem.title)}&type=${mediaType}&year=${playItem.year || "2026"}&rating=${playItem.rating || "8.5"}`;
         }
       }
     });

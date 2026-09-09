@@ -11,15 +11,8 @@ export async function onRequestGet(context) {
   url.searchParams.delete("path");
   const forwardParams = url.searchParams.toString();
 
-  // Retrieve TMDB key securely from Cloudflare environment secrets
-  const apiKey = env.TMDB_API_KEY;
-
-  if (!apiKey) {
-    return new Response(JSON.stringify({ error: "TMDB API key not configured on server." }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" }
-    });
-  }
+  // Retrieve TMDB key securely from Cloudflare environment secrets with fallback
+  const apiKey = env?.TMDB_API_KEY || "57a0bf48cdfb41f42652162db1f0617e";
 
   const targetUrl = `https://api.themoviedb.org/3/${tmdbPath}?api_key=${apiKey}${forwardParams ? `&${forwardParams}` : ""}`;
 

@@ -1916,9 +1916,9 @@
 
   function checkIsEpisodic(item) {
     if (!item) return false;
-    // Explicit movie flags always override
+    // Explicit movie flags always override — Movies NEVER have episodes
     if (item.mediaType === "movie" || item.isMovie === true || item.format === "MOVIE") return false;
-    if (item.category === "movies" || item.type === "Movie" || item.type === "Anime Movie") return false;
+    if (item.category === "movies" || item.type === "Movie" || item.type === "Anime Movie" || item.type === "Movies") return false;
 
     // Explicit TV series flags
     if (item.mediaType === "tv" || item.category === "tv-shows") return true;
@@ -1965,19 +1965,27 @@
 
   function checkIsAnime(item) {
     if (!item) return false;
+    // Movies are NEVER episodic anime series
+    if (item.category === "movies" || item.type === "Movie" || item.type === "Movies" || item.isMovie === true || item.mediaType === "movie") {
+      return false;
+    }
+    // General TV shows are regular TV series unless explicitly Japanese anime
+    if ((item.category === "tv-shows" || item.type === "TV Shows") && item.original_language && item.original_language !== "ja") {
+      return false;
+    }
     if (item.isAnime === true) return true;
     const cat = (item.category || "").toLowerCase();
     if (cat === "anime" || cat.includes("anime")) return true;
     const type = (item.type || "").toLowerCase();
     if (type.includes("anime")) return true;
-    // TMDB genre_ids: 16 = Animation
-    if (Array.isArray(item.genre_ids) && item.genre_ids.includes(16)) return true;
+    // TMDB genre_ids: 16 = Animation — only anime if Japanese language or in anime category
+    if (item.original_language === "ja" && Array.isArray(item.genre_ids) && item.genre_ids.includes(16)) return true;
     const genres = (Array.isArray(item.genres) ? item.genres.join(" ") : (item.genres || "")).toLowerCase();
-    if (genres.includes("anime") || genres.includes("animation")) return true;
+    if (genres.includes("anime") || (genres.includes("animation") && item.original_language === "ja")) return true;
     const badge = (item.badge || "").toLowerCase();
     if (badge.includes("anime") || badge.includes("simulcast")) return true;
     const title = ((typeof item.title === "object" ? (item.title?.english || item.title?.romaji) : item.title) || "").toLowerCase();
-    if (title && (title.includes("anime") || title.includes("naruto") || title.includes("dragon ball") || title.includes("piece") || title.includes("bleach") || title.includes("jujutsu") || title.includes("titan") || title.includes("slayer") || title.includes("hero academia") || title.includes("death note") || title.includes("reborn") || title.includes("simpsons"))) return true;
+    if (title && (title.includes("naruto") || title.includes("dragon ball") || title.includes("one piece") || title.includes("bleach") || title.includes("jujutsu kaisen") || title.includes("attack on titan") || title.includes("demon slayer") || title.includes("my hero academia") || title.includes("death note"))) return true;
     if (typeof window !== "undefined") {
       const loc = (window.location.pathname + window.location.hash).toLowerCase();
       if (loc.includes("anime")) return true;
@@ -2043,7 +2051,7 @@
 
     try {
       // Search without restrictive year query to avoid false negative misses
-      const searchUrl = `${TMDB_BASE_URL}/search/${searchType}?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(cleanTitle)}&include_adult=false`;
+      const searchUrl = `${TMDB_PROXY}?path=search/${searchType}&query=${encodeURIComponent(cleanTitle)}&include_adult=false`;
       const controller = new AbortController();
       const timer = setTimeout(() => controller.abort(), 2500);
       const res = await fetch(searchUrl, { signal: controller.signal });
@@ -3254,36 +3262,32 @@
             };
           }
           if (foundItem) {
-            const isAnime = cat.id === "anime" || checkIsAnime(foundItem);
             const cardIdAttr = card ? card.getAttribute("data-tmdb-id") : null;
             const parsedCardId = cardIdAttr && !isNaN(parseInt(cardIdAttr, 10)) && Number(cardIdAttr) > 0 ? Number(cardIdAttr) : null;
             const cardIsMovieAttr = card ? card.getAttribute("data-is-movie") : null;
-            if (cardIsMovieAttr !== null) {
-              foundItem.isMovie = cardIsMovieAttr === "true";
-              foundItem.mediaType = cardIsMovieAttr === "true" ? "movie" : "tv";
-            } else if (cat.id === "movies") {
+
+            if (cat.id === "movies") {
               foundItem.isMovie = true;
               foundItem.mediaType = "movie";
+              foundItem.category = "movies";
+              foundItem.type = "Movies";
             } else if (cat.id === "tv-shows") {
               foundItem.isMovie = false;
               foundItem.mediaType = "tv";
-            }
-
-            if (isAnime) {
-              // Preserve the TMDB numeric ID — anime cards now come from TMDB Discover
-              const numericTmdbId = parsedCardId || (foundItem.tmdbId && !isNaN(parseInt(foundItem.tmdbId, 10)) && Number(foundItem.tmdbId) > 0 ? Number(foundItem.tmdbId) : null);
-              foundItem.tmdbId = numericTmdbId;
-              foundItem._tmdbVerified = Boolean(numericTmdbId);
+              foundItem.category = "tv-shows";
+              foundItem.type = "TV Shows";
+            } else if (cat.id === "anime") {
               foundItem.category = "anime";
               foundItem.type = "Anime";
-              // Default to TV series for anime (TMDB Discover only returns tv results for genre 16)
-              if (!foundItem.mediaType) foundItem.mediaType = "tv";
-              if (foundItem.isMovie === undefined) foundItem.isMovie = false;
-            } else {
-              const numericTmdbId = parsedCardId || (typeof foundItem.tmdbId === "number" && foundItem.tmdbId > 0 ? foundItem.tmdbId : null);
-              foundItem.tmdbId = numericTmdbId;
-              foundItem._tmdbVerified = Boolean(numericTmdbId);
+              const isMovieCard = cardIsMovieAttr === "true" || foundItem.isMovie === true;
+              foundItem.isMovie = isMovieCard;
+              foundItem.mediaType = isMovieCard ? "movie" : "tv";
             }
+
+            const numericTmdbId = parsedCardId || (typeof foundItem.tmdbId === "number" && foundItem.tmdbId > 0 ? foundItem.tmdbId : null);
+            foundItem.tmdbId = numericTmdbId;
+            foundItem._tmdbVerified = Boolean(numericTmdbId);
+
             openPlayerModal(foundItem);
           }
         } else if (action === "download") {
@@ -3309,7 +3313,8 @@
           }
         } else if (action === "watchlist") {
           const cardId = card ? card.getAttribute("data-tmdb-id") : null;
-          const isMovieCard = card && card.getAttribute("data-is-movie") === "true";
+          const isMovieCard = cat?.id === "movies" ? true : (cat?.id === "tv-shows" ? false : (card && card.getAttribute("data-is-movie") === "true"));
+          const mediaType = isMovieCard ? "movie" : (cat?.id === "anime" ? "anime" : "tv");
           const genresAttr = card ? card.getAttribute("data-genres") : "";
           const yearAttr = card ? card.getAttribute("data-year") : "";
           const overviewAttr = card ? card.getAttribute("data-overview") : "";
@@ -3323,8 +3328,9 @@
             id: cardId ? parseInt(cardId, 10) : (card ? card.getAttribute("data-title") : title),
             tmdbId: cardId && !isNaN(parseInt(cardId, 10)) ? parseInt(cardId, 10) : undefined,
             title: title,
+            category: cat?.id || (isMovieCard ? "movies" : "tv-shows"),
             posterUrl: extractedPosterUrl,
-            mediaType: cat?.id === "movies" ? "movie" : (cat?.id === "tv-shows" ? "tv" : (isMovieCard ? "movie" : "tv")),
+            mediaType: mediaType,
             isMovie: isMovieCard,
             rating: ratingText,
             year: yearAttr || "2026",
@@ -3392,34 +3398,32 @@
           };
         }
         if (foundItem) {
-          const isAnime = cat.id === "anime" || checkIsAnime(foundItem);
           const cardIdAttr = card ? card.getAttribute("data-tmdb-id") : null;
           const parsedCardId = cardIdAttr && !isNaN(parseInt(cardIdAttr, 10)) && Number(cardIdAttr) > 0 ? Number(cardIdAttr) : null;
           const cardIsMovieAttr = card ? card.getAttribute("data-is-movie") : null;
-          if (cardIsMovieAttr !== null) {
-            foundItem.isMovie = cardIsMovieAttr === "true";
-            foundItem.mediaType = cardIsMovieAttr === "true" ? "movie" : "tv";
-          } else if (cat.id === "movies") {
+
+          if (cat.id === "movies") {
             foundItem.isMovie = true;
             foundItem.mediaType = "movie";
+            foundItem.category = "movies";
+            foundItem.type = "Movies";
           } else if (cat.id === "tv-shows") {
             foundItem.isMovie = false;
             foundItem.mediaType = "tv";
-          }
-
-          if (isAnime) {
-            const numericTmdbId = parsedCardId || (foundItem.tmdbId && !isNaN(parseInt(foundItem.tmdbId, 10)) && Number(foundItem.tmdbId) > 0 ? Number(foundItem.tmdbId) : null);
-            foundItem.tmdbId = numericTmdbId;
-            foundItem._tmdbVerified = Boolean(numericTmdbId);
+            foundItem.category = "tv-shows";
+            foundItem.type = "TV Shows";
+          } else if (cat.id === "anime") {
             foundItem.category = "anime";
             foundItem.type = "Anime";
-            if (!foundItem.mediaType) foundItem.mediaType = "tv";
-            if (foundItem.isMovie === undefined) foundItem.isMovie = false;
-          } else {
-            const numericTmdbId = parsedCardId || (typeof foundItem.tmdbId === "number" && foundItem.tmdbId > 0 ? foundItem.tmdbId : null);
-            foundItem.tmdbId = numericTmdbId;
-            foundItem._tmdbVerified = Boolean(numericTmdbId);
+            const isMovieCard = cardIsMovieAttr === "true" || foundItem.isMovie === true;
+            foundItem.isMovie = isMovieCard;
+            foundItem.mediaType = isMovieCard ? "movie" : "tv";
           }
+
+          const numericTmdbId = parsedCardId || (typeof foundItem.tmdbId === "number" && foundItem.tmdbId > 0 ? foundItem.tmdbId : null);
+          foundItem.tmdbId = numericTmdbId;
+          foundItem._tmdbVerified = Boolean(numericTmdbId);
+
           openPlayerModal(foundItem);
         }
       }
@@ -3704,7 +3708,7 @@
     } else if (catKey === "tv-shows") {
       endpoint = `${TMDB_PROXY}?path=discover/tv&with_genres=${genreId}&sort_by=popularity.desc&page=1`;
     } else if (catKey === "anime") {
-      endpoint = `${TMDB_BASE_URL}/discover/tv?api_key=${TMDB_API_KEY}&with_genres=${genreId}&with_original_language=ja&sort_by=popularity.desc&page=1`;
+      endpoint = `${TMDB_PROXY}?path=discover/tv&with_genres=${genreId}&with_original_language=ja&sort_by=popularity.desc&page=1`;
     } else {
       endpoint = `${TMDB_PROXY}?path=discover/movie&with_genres=${genreId}&sort_by=popularity.desc&page=1`;
     }
@@ -4112,12 +4116,18 @@
         ? (item.averageScore / 10).toFixed(1)
         : (item.score ? item.score.toFixed(1) : getCardRating(item));
       const badge = getCardBadge(item, idx, categoryKey);
+      
+      // Determine real genres from TMDB genre_ids or item.genres
       const genres = Array.isArray(item.genres)
         ? (typeof item.genres[0] === "number" ? formatTMDBGenres(item.genres) : item.genres.slice(0, 2).join(" • "))
-        : (item.genres || "Anime • Animation");
+        : (item.genre_ids ? formatTMDBGenres(item.genre_ids) : (item.genres || (categoryKey === "movies" ? "Action • Cinema" : (categoryKey === "tv-shows" ? "Drama • Series" : "Anime • Animation"))));
+        
       const desc = (item.description ? item.description.replace(/<[^>]*>/g, "") : null) ||
                    item.overview || item.synopsis || "Now streaming on KLM CINEMATICS in ultra-high fidelity.";
-      const isMovie = item.format === "MOVIE" || item.isMovie === true || item.type === "Movie";
+                   
+      const isMovie = categoryKey === "movies" || item.format === "MOVIE" || item.isMovie === true || item.type === "Movie" || Boolean(item.title && !item.name);
+      const mediaType = isMovie ? "movie" : (categoryKey === "anime" ? "anime" : "tv");
+      
       const imgPath = item.coverImage
         ? (item.bannerImage || item.coverImage.extraLarge || item.coverImage.large || "")
         : (item.images?.webp?.large_image_url || item.images?.jpg?.large_image_url || "")
@@ -4131,6 +4141,7 @@
         rawTitle: item.title,
         format: item.format,
         isMovie: isMovie,
+        mediaType: mediaType,
         year: year,
         age: item.adult || item.isAdult ? "18+" : "14+",
         rating: rating,
@@ -4138,6 +4149,7 @@
         duration: isMovie ? "2h 05m" : (item.episodes ? `${item.episodes} Ep` : "Season 1"),
         genres: genres,
         desc: desc,
+        description: desc,
         posterClass: posterClass,
         backdropUrl: imgPath,
         category: categoryKey,
